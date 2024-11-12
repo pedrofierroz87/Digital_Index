@@ -1,0 +1,586 @@
+---
+title: "Digital_Index"
+format: html
+editor: visual
+---
+
+# Municipality digitalization and local engagement: The case of Chile
+
+Pedro Fierro
+Ellen Helsper
+
+## Abstract
+
+This paper analyses the elements and contextual factors related to the digitalisation of local governments and examines the impacts of municipal digitalisation on political engagement—both attitudinal and behavioural. Our findings are twofold. First, at the national level, considering 343 local administrations, the results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, whereas in central Chile, income and workforce factors play a greater role. Second, based on 9,924 face-to-face cases collected in Chile’s Valparaíso region from 2018 to 2024, results indicate that living in a digitalised municipality positively and meaningfully influences not only the likelihood of using digital services but also the belief that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement. These findings are important for understanding democratisation and the role of local government modernisation, as well as for addressing the causes and direct consequences of digital inequalities.
+
+**Keywords:** local governments; digital inequalities; democratisation; civic engagement; online participation
+
+## Introduction
+
+One of the major challenges faced by both emerging and established democracies is the modernization of local governments, with digitalization as a core component. Digitalization not only aims to make processes more efficient and faster but also seeks to bring the entire state structure closer to individuals, potentially fostering higher levels of civic engagement. Increasingly, research suggests that citizens in “left-behind” areas experience greater political disengagement and negative sentiments toward politics and its processes.
+Chile, our case study, is no exception, especially given the pronounced centralism that has long shaped the state, resulting in diverse citizen experiences depending on geographic location. Within this context, digitalization has become a priority for policymakers; however, its broader consequences are not always fully appreciated.
+
+This paper has a dual objective. First, it seeks to identify the factors that may explain the digitalisation of local governments. Second, it examines, at an individual level, the effects of these digitalisation processes on political engagement, both in terms of attitudes and behaviours.
+
+	To achieve these objectives, we use official data from the Chilean government and the Digital Municipal Index, recently developed by the Millennium Nucleus of Inequalities and Digital Opportunities (NUDOS). Additionally, to analyse the phenomenon at the individual level, we draw on survey data from 9,924 face-to-face interviews conducted by Fundación P! ensa in the Valparaíso region of Chile. Our findings are twofold. First, at the national level, examining 343 local administrations, results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, while in central Chile, income and workforce factors are more critical. Second, at the individual level, results indicate that individuals living in a municipality with a digitalised local government are more likely to use official digital services and, more importantly, are more inclined to believe that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement.
+	
+	These findings contribute not only to understanding the causes and consequences of digitalisation processes in an emerging democracy like Chile but also offer insight into the impact of digital inequalities. Since the beginning of the “electronic revolution,” the Internet was envisioned as a tool to transcend physical boundaries and foster the inclusion of politically marginalised areas. Over time, however, the reinforcement thesis—suggesting that offline inequalities are simply replicated online—has gained traction. The results of this study offer pathways for achieving greater inclusion in the digital age.
+
+
+## Literature Review
+
+### Digital inequalities
+
+### Local engagement
+
+### Case Study
+
+## Data and Methods
+
+### Data
+
+Al data considered in this study is publicly available.
+
+### Municipal-Level Data
+
+First, municipal-level data was considered, covering the 343 mainland municipalities of Chile (excluding Juan Fernández and Easter Island).
+
+#### Variables
+
+**Digital Municipality Index**. The level of digitalization was measured using the Digital Municipality Index, developed by the Millennium Nucleus of Inequalities and Digital Opportunities (NUDOS). The index is based on 34 potential services offered by municipal websites. These 34 services were grouped into two categories: "Payments, procedures, and online services," which includes 13 activities, and "Information and transparency," which includes 21 activities.
+
+**Population**. Population was measured as the projected number of people living in each municipality in 2023, expressed in log terms. The data comes from the National Municipal Information System (SINIM).
+
+**Municipal Income**. Municipal income was measured as own-source revenues, meaning the income generated independently by each municipality, expresed in log terms. The data comes from the National Municipal Information System (SINIM).
+
+**Rurality**. Rurality was measured as the percentage of the population living in rural areas within each municipality in 2023. This data was also obtained from the National Municipal Information System (SINIM).
+
+**Qualified Municipal Workforce**. To capture the professional resources of each municipality, the number of employees with a university degree was considered, expressed in log terms. The data comes from the National Municipal Information System (SINIM).
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+rm(list=ls())
+
+library(haven)
+library(tidyverse)
+library(sf)
+library(spdep)
+library(foreign)
+library(car)
+library(broom)
+library(interactions)
+library(tigris)
+library(corrplot)
+library(ggthemes)
+library(patchwork)
+library(showtext)
+library(scico)
+library(sjPlot)
+library(ggsci)
+library(readxl)
+library(stringi)
+library(stringr)
+library(lavaan)
+library(psych)
+
+```
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+shape <- st_read("map_chile.shp")
+data_sinim <- read_excel("Data_Mun_2023.xlsx", col_names = TRUE)
+data_index <- read_excel("Data_Digital_Index.xlsx", col_names = TRUE)
+
+shape <- shape %>%
+  select(CUTCOM, CUTPROV, CUTREG, NOMBRE, Superficie, geometry)
+
+data_sinim$Comuna <- data_sinim$Comuna %>%
+  stri_replace_all_fixed("ñ", "N") %>%  # Replace ñ with N
+  stri_trans_general("Latin-ASCII")      # Remove accents
+
+data_sinim$Pob_Rural_Porc <- data_sinim$Pob_Rural/100
+data_sinim <- data_sinim %>%
+  mutate(log_Ingresos_Propios_Permanentes = ifelse(Ingresos_Propios_Permanentes > 0,
+                                                   log(Ingresos_Propios_Permanentes), 
+                                                   NA))
+data_sinim <- data_sinim %>%
+  mutate(log_Num_Planta_Profes = ifelse(Num_Planta_Profes > 0,
+                                                   log(Num_Planta_Profes), 
+                                                   NA))
+
+data_sinim <- data_sinim %>%
+  mutate(log_Poblacion.y = ifelse(Poblacion > 0,
+                                          log(Poblacion), 
+                                          NA))
+
+shape <- shape %>%
+  mutate(log_Superficie = ifelse(Superficie > 0,
+                                          log(Superficie), 
+                                          NA))
+
+# Apply the transformation to the 'comuna' column in the dataset
+data_index <- data_index %>%
+  mutate(Comuna = stri_trans_general(str_to_upper(Comuna), "Latin-ASCII"))
+
+data_index <- data_index %>%
+  mutate(Comuna = ifelse(Comuna == "TAITAL", "TALTAL",
+                         ifelse(Comuna == "TIL TIL", "TILTIL",
+                                ifelse(Comuna == "MACHALLI", "MACHALI",
+                                       ifelse(Comuna == "COYHAIQUE", "COIHAIQUE",
+                                              ifelse(Comuna == "PAIHUANO", "PAIGUANO", Comuna))))))
+      
+
+# Check the first few rows to verify
+head(data_index)
+data_index$NOMBRE <- data_index$Comuna
+merged_data <- left_join(shape, data_index, by = "NOMBRE")
+merged_data <- left_join(merged_data, data_sinim, by = "Comuna")
+
+merged_data$Ingresos_Propios_Permanentes <- as.numeric(merged_data$Ingresos_Propios_Permanentes)
+
+
+md_north <- merged_data %>%
+  filter(CUTREG %in% c("01", "02", "03", "04", "15"))
+
+md_centre <- merged_data %>%
+  filter(CUTREG %in% c("05", "06", "07", "13"))
+
+md_south <- merged_data %>%
+  filter(CUTREG %in% c("08", "09", "10", "11" , "12", "14", "16"))
+
+
+```
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Find cases in data_index that could not find a match in map_data
+unmatched_cases <- anti_join(data_index, shape, by = "NOMBRE")
+
+# View the first few rows of the unmatched cases
+head(unmatched_cases)
+```
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# load font
+font_add_google("Roboto Condensed", "robotocondensed")
+# automatically use showtext to render text
+showtext_auto()
+
+theme_map <- function(...) {
+  theme_tufte() +
+  theme(
+    text = element_text(family = "robotocondensed", size = 30),
+    strip.text = element_text(size = 30),
+    # legend
+    legend.title=element_text(size=20), 
+    legend.text=element_text(size=18),
+    # remove all axes
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = "right"
+    )
+}
+
+theme_tufte2 <- function(...) {
+  theme_tufte() +
+  theme(
+    text = element_text(family = "robotocondensed", size = 24),
+    )
+}
+
+
+
+```
+
+### Individual-Level Data
+
+Secondly, we use data from the Political Opinion Survey (EOP), developed by Fundación P!ensa and conducted with IPSOS and Datavoz-STATCOM. This paper considers seven iterations of the survey from 2018 to 2024, encompassing 9,924 face-to-face interviews conducted in the ten largest cities in the Valparaíso region of Chile. The survey employs a probabilistic, non-proportional design with a three-stage random sampling method (by block, household, and individual), targeting men and women aged 18 and older.
+
+#### Variables
+
+**Online Political Efficacy**. To measure online political efficacy, we follow the approach proposed by Sasaki (2016, 2017), asking respondents to indicate their agreement with the following statements:
+
+1.  Using the internet, people like me have more political power.
+2.  Using the internet, I can have a greater voice regarding what the government does.
+3.  Using the internet, it is easier for me to understand politics.
+4.  Using the internet, public officials are more concerned about what I think.
+
+Each of these questions was measured on a 5-point Likert scale, where 1 indicated strong disagreement and 5 indicated strong agreement.
+
+**Awareness and Use of Municipal Website**. To measure specific uses of the official local government website, respondents were asked to indicate their agreement with the following statements:
+
+1.	I am aware of the existence of the municipal website (know_web).
+2.	I have used the municipal website to complete administrative procedures and/or make service payments (use_adm).
+3.	I have used the municipal website to seek information from the municipality (use_info).
+4.	I have used the municipal website to request transparency information (use_transp).
+5.	I have used the municipal website for other purposes (use_other).
+Each of these questions was measured as a dummy variable, coded as 1 for “yes” and 0 otherwise.
+
+
+**Living in a Digitalized Municipality**. To examine contextual factors that may influence our variables of interest, we included a variable to determine whether individuals live in a highly or minimally digitalized municipality. Specifically, the value of the Digital Municipality Index (measured at the municipal level) was assigned to individuals based on their place of residence. To prevent misinterpretations and ecological fallacies, it is essential to clarify that this variable represents an individual-level attribute: living in a municipality with a strong digital services offering.
+
+**Living in a Wealthy Municipality**. Additionally, we considered the impact of residing in a wealthy municipality. This was measured by assigning the Municipal Income level to individuals based on their municipality of residence. Similar to the previous variable, it is important to emphasize that this measure does not reflect individual income (as we have a separate socioeconomic variable described in the following sections); rather, it captures only the effect of living in a municipality classified as affluent or economically disadvantaged.
+
+**Political Interest**. Political interest was measured using a self-reported approach. Specifically, all respondents were asked how interested they were in the following areas:
+
+1.	Politics
+2.	Issues happening in the world
+3.	Issues happening in the country
+4.	Issues happening in their region
+5.	Issues happening in their neighbourhood
+
+Each question was measured on a 4-point Likert scale, where 1 indicated 'no interest' and 4 indicated 'strong interest.' Using confirmatory factor analysis (CFA), a factor for political interest was constructed from these responses (Cronbach's alpha: 0.86).
+
+**Control Variables** Various sociodemographic variables were included as control variables, such as age, education, gender, and socioeconomic status.
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+EOP <- read_dta("digital_data.dta")
+
+EOP <- EOP %>%
+  mutate(dig_mun = case_when(
+    com1 == 1 ~ 0.607, #LosAndes
+    com2 == 1 ~ 0.440, #LaLigua
+    com3 == 1 ~ 0.645, #Quillota
+    com4 == 1 ~ 0.475, #SanAntonio
+    com5 == 1 ~ 0.610,   #SanFelipe
+    com6 == 1 ~ 0.528,  #Concon
+    com7 == 1 ~ 0.769, #Valparaiso
+    com8 == 1 ~ 0.743,   #VinaDelMar
+    com9 == 1 ~ 0.716,  #Quilpue
+    com10 == 1 ~ 0.599, #VillaAlemana
+    TRUE ~ NA_real_
+  ))
+
+EOP <- EOP %>%
+  mutate(dig_mun_2 = case_when(
+    com1 == 1 ~ merged_data %>% filter(Comuna == "LOS ANDES") %>% pull(Municipio_Digital),  # LosAndes
+    com2 == 1 ~ merged_data %>% filter(Comuna == "LA LIGUA") %>% pull(Municipio_Digital),   # LaLigua
+    com3 == 1 ~ merged_data %>% filter(Comuna == "QUILLOTA") %>% pull(Municipio_Digital),   # Quillota
+    com4 == 1 ~ merged_data %>% filter(Comuna == "SAN ANTONIO") %>% pull(Municipio_Digital), # SanAntonio
+    com5 == 1 ~ merged_data %>% filter(Comuna == "SAN FELIPE") %>% pull(Municipio_Digital),  # SanFelipe
+    com6 == 1 ~ merged_data %>% filter(Comuna == "CONCON") %>% pull(Municipio_Digital),     # Concon
+    com7 == 1 ~ merged_data %>% filter(Comuna == "VALPARAISO") %>% pull(Municipio_Digital), # Valparaiso
+    com8 == 1 ~ merged_data %>% filter(Comuna == "VINA DEL MAR") %>% pull(Municipio_Digital), # VinaDelMar
+    com9 == 1 ~ merged_data %>% filter(Comuna == "QUILPUE") %>% pull(Municipio_Digital),    # Quilpue
+    com10 == 1 ~ merged_data %>% filter(Comuna == "VILLA ALEMANA") %>% pull(Municipio_Digital), # VillaAlemana
+    TRUE ~ NA_real_
+  ))
+
+
+EOP <- EOP %>%
+  mutate(popul = case_when(
+    com1 == 1 ~ merged_data %>% filter(Comuna == "LOS ANDES") %>% pull(log_Poblacion.y),  # LosAndes
+    com2 == 1 ~ merged_data %>% filter(Comuna == "LA LIGUA") %>% pull(log_Poblacion.y),   # LaLigua
+    com3 == 1 ~ merged_data %>% filter(Comuna == "QUILLOTA") %>% pull(log_Poblacion.y),   # Quillota
+    com4 == 1 ~ merged_data %>% filter(Comuna == "SAN ANTONIO") %>% pull(log_Poblacion.y), # SanAntonio
+    com5 == 1 ~ merged_data %>% filter(Comuna == "SAN FELIPE") %>% pull(log_Poblacion.y),  # SanFelipe
+    com6 == 1 ~ merged_data %>% filter(Comuna == "CONCON") %>% pull(log_Poblacion.y),     # Concon
+    com7 == 1 ~ merged_data %>% filter(Comuna == "VALPARAISO") %>% pull(log_Poblacion.y), # Valparaiso
+    com8 == 1 ~ merged_data %>% filter(Comuna == "VINA DEL MAR") %>% pull(log_Poblacion.y), # VinaDelMar
+    com9 == 1 ~ merged_data %>% filter(Comuna == "QUILPUE") %>% pull(log_Poblacion.y),    # Quilpue
+    com10 == 1 ~ merged_data %>% filter(Comuna == "VILLA ALEMANA") %>% pull(log_Poblacion.y), # VillaAlemana
+    TRUE ~ NA_real_
+  ))
+
+EOP <- EOP %>%
+  mutate(ingresos = case_when(
+    com1 == 1 ~ merged_data %>% filter(Comuna == "LOS ANDES") %>% pull(log_Ingresos_Propios_Permanentes),  # LosAndes
+    com2 == 1 ~ merged_data %>% filter(Comuna == "LA LIGUA") %>% pull(log_Ingresos_Propios_Permanentes),   # LaLigua
+    com3 == 1 ~ merged_data %>% filter(Comuna == "QUILLOTA") %>% pull(log_Ingresos_Propios_Permanentes),   # Quillota
+    com4 == 1 ~ merged_data %>% filter(Comuna == "SAN ANTONIO") %>% pull(log_Ingresos_Propios_Permanentes), # SanAntonio
+    com5 == 1 ~ merged_data %>% filter(Comuna == "SAN FELIPE") %>% pull(log_Ingresos_Propios_Permanentes),  # SanFelipe
+    com6 == 1 ~ merged_data %>% filter(Comuna == "CONCON") %>% pull(log_Ingresos_Propios_Permanentes),     # Concon
+    com7 == 1 ~ merged_data %>% filter(Comuna == "VALPARAISO") %>% pull(log_Ingresos_Propios_Permanentes), # Valparaiso
+    com8 == 1 ~ merged_data %>% filter(Comuna == "VINA DEL MAR") %>% pull(log_Ingresos_Propios_Permanentes), # VinaDelMar
+    com9 == 1 ~ merged_data %>% filter(Comuna == "QUILPUE") %>% pull(log_Ingresos_Propios_Permanentes),    # Quilpue
+    com10 == 1 ~ merged_data %>% filter(Comuna == "VILLA ALEMANA") %>% pull(log_Ingresos_Propios_Permanentes), # VillaAlemana
+    TRUE ~ NA_real_
+  ))
+```
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+EOP$useweb_nona <- replace_na(EOP$useweb, 0)
+table(EOP$useweb_nona)
+
+EOP$useadm_nona <- replace_na(EOP$useadm, 0)
+table(EOP$useadm_nona)
+
+EOP$useinfo_nona <- replace_na(EOP$useinfo, 0)
+table(EOP$useinfo_nona)
+
+EOP$usetransp_nona <- replace_na(EOP$usetransp, 0)
+table(EOP$usetransp_nona)
+
+EOP$useother_nona <- replace_na(EOP$useother, 0)
+table(EOP$useother_nona)
+
+```
+
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+
+cronbach_ope <- alpha(na.omit(EOP[c("ope1", "ope2", "ope3", "ope4")]))
+cronbach_ope
+
+cronbach_intpol <- alpha(na.omit(EOP[c("polint1", "polint2", "polint3", "polint4", "polint5")]))
+cronbach_intpol
+
+EOP_nona <- na.omit(EOP[c("ope1", "ope2", "ope3", "ope4", "dig_mun", "ingresos", "sex", "age", "SES", "education", "polint1", "polint2", "polint3", "polint4", "polint5", "year", "useweb_nona", "useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona")])
+
+EOP_nona <- EOP_nona %>%
+  mutate(across(where(is.labelled), as.numeric))
+
+cfa.model <- 'ope =~ ope1 + ope2 + ope3 + ope4'
+cfa.model2 <- 'intpol =~ polint1 + polint2 + polint3 + polint4 + polint5'
+
+fit_cfa <- cfa(cfa.model, data = EOP_nona)
+fit_cfa2 <- cfa(cfa.model2, data = EOP_nona)
+
+latent_scores <- predict(fit_cfa)
+latent_scores2 <- predict(fit_cfa2)
+
+EOP_nona <- cbind(EOP_nona, latent_scores, latent_scores2)
+```
+
+
+## Results
+
+### First Part: Analyses at the municipal level
+
+First, the analyses focused on the national context, using aggregated data at the municipal level. Starting with a descriptive approach (see Figure 2) to examine the Digital Municipality Index, we observe an apparent relationship between population size, rurality, income, and workforce professionalisation in each municipality. The distribution of the index shows that more urban, densely populated municipalities with a more qualified workforce tend to score higher. However, an inferential approach provides a slightly different perspective. While municipal income appears to be the most important factor explaining a higher digitalisation index, rurality and the formal qualifications of the municipal workforce do not have significant coefficients. Population, though close to significance, also plays a role. Thus, the results suggest that the most populated and wealthiest municipalities tend to offer more digital services to their residents (see Table 1).
+
+Moreover, in the context of a highly centralised country, these results vary when analysing different regions separately. In southern Chile, population size and municipal income appear to be more influential, whereas in central Chile, income and workforce factors play a greater role (see Figure 3).
+
+**Figure 1** Digital Municipality Index
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+map_north <- ggplot(data = md_north) +
+  geom_sf(aes(fill = Municipio_Digital, geometry = geometry), color = "transparent", size = 0.5) +
+  scale_fill_viridis_c(name = "Services Available on the Municipal Website", 
+                       option = "C",
+                       guide = guide_colorbar(title.position="top")) +
+  labs(title = "Northern Chile") +
+  theme_map() +
+  theme(title = element_text(size = 20, face = "bold", colour = "#000000"),
+        legend.title = element_text(size=16, face = "plain", hjust=0.5, lineheight=0.45,        color="black"),
+        legend.text=element_text(size=15),
+        legend.position = "bottom",
+        legend.key.width = unit(2.5, "cm"),
+        legend.key.height = unit(0.4, "cm"))
+map_north
+
+map_centre <- ggplot(data = md_centre) +
+  geom_sf(aes(fill = Municipio_Digital, geometry = geometry), color = "transparent", size = 0.5) +
+  scale_fill_viridis_c(name = "Services Available on the Municipal Website", 
+                       option = "C",
+                       guide = guide_colorbar(title.position="top")) +
+  labs(title = "Central Region of Chile") +
+  theme_map() +
+  theme(title = element_text(size = 20, face = "bold", colour = "#000000"),
+        legend.title = element_text(size=16, face = "plain", hjust=0.5, lineheight=0.45,        color="black"),
+        legend.text=element_text(size=15),
+        legend.position = "bottom",
+        legend.key.width = unit(2.5, "cm"),
+        legend.key.height = unit(0.4, "cm"))
+map_centre
+
+map_south <- ggplot(data = md_south) +
+  geom_sf(aes(fill = Municipio_Digital, geometry = geometry), color = "transparent", size = 0.5) +
+  scale_fill_viridis_c(name = "Services Available on the Municipal Website", 
+                       option = "C",
+                       guide = guide_colorbar(title.position="top")) +
+  labs(title = "Southern Chile") +
+  theme_map() +
+  theme(title = element_text(size = 20, face = "bold", colour = "#000000"),
+        legend.title = element_text(size=16, face = "plain", hjust=0.5, lineheight=0.45,        color="black"),
+        legend.text=element_text(size=15),
+        legend.position = "bottom",
+        legend.key.width = unit(2.5, "cm"),
+        legend.key.height = unit(0.4, "cm"))
+map_south
+
+```
+
+**Figure 2**. Dispersion diagram of the Digital Municipality Index, considering population, rurality, municipal income and quaified municipal workforce.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(merged_data, aes(x = Pob_Rural_Porc, y = Municipio_Digital, size = log_Poblacion.y)) +
+  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
+  labs(title = "Rurality and digitalization",
+       x = "Rurality (%)",
+       y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
+  theme_tufte2() +
+  scale_size_continuous(range = c(1, 10)) +
+  guides(size = FALSE)  # Remove the size legend
+
+ggplot(merged_data, aes(x = log_Ingresos_Propios_Permanentes, y = Municipio_Digital, size = log_Poblacion.y)) +
+  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
+  labs(title = "Municipal incomes and digitalization",
+       x = "Own-Source Revenues (log)",
+       y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
+  theme_tufte2() +
+  scale_size_continuous(range = c(1, 10)) +
+  guides(size = FALSE)  # Remove the size legend
+
+ggplot(merged_data, aes(x = log_Num_Planta_Profes, y = Municipio_Digital, size = log_Poblacion.y)) +
+  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
+  labs(title = "Workforce and digitalization",
+       x = "Staff with degrees (log)",
+       y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
+  theme_tufte2() +
+  scale_size_continuous(range = c(1, 10)) +
+  guides(size = FALSE)  # Remove the size legend
+
+```
+
+**Table 1** OLS for Digital Municipality Index at the municipal level
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model0<- lm(Municipio_Digital ~ log_Poblacion.y + Pob_Rural_Porc + log_Ingresos_Propios_Permanentes + log_Num_Planta_Profes, data = merged_data)
+summary(model0)
+model1 <- lm(Municipio_Digital ~ log_Poblacion.y + Pob_Rural_Porc + log_Ingresos_Propios_Permanentes + log_Num_Planta_Profes, data = md_north)
+summary(model1)
+model2 <- lm(Municipio_Digital ~ log_Poblacion.y + Pob_Rural_Porc + log_Ingresos_Propios_Permanentes + log_Num_Planta_Profes, data = md_centre)
+summary(model2)
+model3 <- lm(Municipio_Digital ~ log_Poblacion.y + Pob_Rural_Porc + log_Ingresos_Propios_Permanentes + log_Num_Planta_Profes, data = md_south)
+summary(model3)
+```
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+get_coef <- function(model, model_name) {
+  coefs <- summary(model)$coefficients
+  data.frame(
+    Term = rownames(coefs),
+    Estimate = coefs[, "Estimate"],
+    Std_Error = coefs[, "Std. Error"],  # Rename to 'Std_Error'
+    Model = model_name
+  )
+}
+# Create a mapping of old variable names to new names
+name_mapping <- c(
+  log_Poblacion.y = "Population (log)",
+  Pob_Rural_Porc = "Rurality",
+  log_Ingresos_Propios_Permanentes = "Own-Source Revenues (log)",
+  log_Num_Planta_Profes = "Staff with degrees (log)"
+)
+```
+
+**Figure 3**. OLS for Digital Municipality Index at the municipal level
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Assuming coef_df is already prepared as per previous instructions
+
+# Apply the function to both models
+coef_df1 <- get_coef(model1, "Model 1")
+coef_df2 <- get_coef(model2, "Model 2")
+coef_df3 <- get_coef(model3, "Model 3")
+
+
+# Combine the data frames and remove the intercept
+coef_df <- rbind(coef_df1, coef_df2, coef_df3)
+coef_df <- coef_df[!coef_df$Term %in% c("(Intercept)"), ]
+
+
+# Calculate 95% confidence intervals and determine significance
+coef_df <- coef_df %>%
+  mutate(
+    Lower_CI = Estimate - 1.645 * Std_Error,  # Lower bound of the CI
+    Upper_CI = Estimate + 1.645 * Std_Error,  # Upper bound of the CI
+    Significant = if_else(Lower_CI > 0 & Upper_CI > 0 | Lower_CI < 0 & Upper_CI < 0, TRUE, FALSE)  
+    )
+
+
+# Apply the mapping to the dataframe
+coef_df <- coef_df %>%
+  mutate(Term = factor(Term, levels = names(name_mapping), labels = name_mapping))
+
+# Define a dodge width for better separation
+dodge_width <- 0.5
+
+# Create the plot with updated names
+ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, color = Model, group = Model)) +
+  geom_pointrange(position = position_dodge(width = dodge_width), aes(size = Significant)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "orange") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Coefficients") +
+  coord_flip() +  # Flips the axes for better visualization of terms
+  scale_color_manual(values = c("darkblue", "darkred", "darkgreen"),
+                     labels = c("Northern Chile", "Central Region of Chile", "Southern Chile")) +  # Set custom colors for each model
+  scale_size_manual(values = c(0.5, 1.5), guide = FALSE) +  # Adjust line width based on significance
+  theme(
+    legend.position = "right",  # Hide the legend for line size
+    axis.text.y = element_text(size = 8)  # Adjust text size if needed
+  )
+```
+
+### Second Part: Analyses at the individual level, Chilean region of Valparaiso as case study
+
+Secondly, the specific case of the Valparaíso region in Chile was analysed using individual-level data. In this context, the aim was to test whether municipal digitalisation affects online political engagement by examining both attitudinal and behavioural components. The attitudinal component presents a complex picture (see Table 2). Living in a digitalised municipality does not appear to impact online political efficacy—defined as individuals' beliefs that the internet empowers citizens politically. However, the other contextual factor, living in a wealthy municipality, shows a negative and significant relationship with these attitudes. In other words, individuals in marginalised areas with poorer municipalities tend to view the Internet as a valuable tool for enhancing their political voice.
+
+Interestingly, the influence of a digitalised municipality changes when analysing specific measures of online political efficacy. Specifically, results indicate that the digitalisation of local government has a positive and significant relationship with OPE1, or the belief that "by using the internet, people like me have more political power."
+
+Regarding the behavioural dimension of online local participation, the results are consistent and robust (see Table 3). Living in a digitalised municipality has a positive and significant relationship with all measures of awareness and use of the official municipal website, a pattern not observed for residents of wealthy municipalities. In fact, while the relationship with living in a wealthy municipality is significant, it is in the opposite direction. In other words, the results suggest that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement.
+
+
+**Table 2** OLS for Online Political Efficacy at the Individual Level
+
+```{r  echo=FALSE, message=FALSE, warning=FALSE}
+modela <- lm(ope ~ dig_mun + ingresos + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modela)
+
+modelb <- lm(ope1 ~ dig_mun + ingresos + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modelb)
+
+modelc <- lm(ope2 ~ dig_mun + ingresos + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modelc)
+
+modeld <- lm(ope3 ~ dig_mun + ingresos + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modeld)
+
+modele <- lm(ope4 ~ dig_mun + ingresos + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modele)
+```
+
+**Table 3** OLS for Effective Municipality Webpage use at the Individual Level
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+modelf <- glm(useweb ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
+summary(modelf)
+
+modelg <- glm(useadm ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
+summary(modelg)
+
+modelh <- glm(useinfo ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
+summary(modelh)
+
+modeli <- glm(usetransp ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
+summary(modeli)
+
+modelj <- glm(useother ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
+summary(modelj)
+
+```
+
+```{r  echo=FALSE, message=FALSE, warning=FALSE}
+modelf_nona <- glm(useweb_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelf_nona)
+
+modelg_nona <- glm(useadm_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelg_nona)
+
+modelh_nona <- glm(useinfo_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelh_nona)
+
+modeli_nona <- glm(usetransp_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modeli_nona)
+
+modelj_nona <- glm(useother_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelj_nona)
+```
+
+
+## Conclusion
+
+[The results are consistent with previous literature. Marginalised areas—those with poorer municipalities—tend to view the Internet as a useful tool and are more likely to engage. At the same time, municipal digitalisation significantly impacts this engagement, which goes beyond simply requesting documents and completing administrative tasks to include accountability and accessing municipal information. It’s not about wealthy municipalities but rather about those that make an effort to digitalise.]
