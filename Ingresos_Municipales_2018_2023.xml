@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>MCEDWIN</Author>
+  <LastAuthor>Pedro Fierro Zamora</LastAuthor>
+  <Created>2013-07-20T02:44:40Z</Created>
+  <LastSaved>2025-01-20T11:31:15Z</LastSaved>
+  <Company>Windows</Company>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>17440</WindowHeight>
+  <WindowWidth>28040</WindowWidth>
+  <WindowTopX>1100</WindowTopX>
+  <WindowTopY>800</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:Family="Swiss"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#666666" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#FFFFFF"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#FFFFFF"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#FFFFFF"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#FFFFFF"/>
+   </Borders>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s64">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000099" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Hoja1">
+  <Table ss:ExpandedColumnCount="9" ss:ExpandedRowCount="13" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="60" ss:DefaultRowHeight="13">
+   <Column ss:Width="270" ss:Span="7"/>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Valores en miles de pesos nominales (M$) de cada año.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">IADM41 (M$) Ingresos Propios Permanentes (IPP)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">CODIGO</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">MUNICIPIO</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2023</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2022</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2021</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2020</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2019</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">2018</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5101</Data></Cell>
+    <Cell><Data ss:Type="String">VALPARAÍSO</Data></Cell>
+    <Cell><Data ss:Type="Number">31659119</Data></Cell>
+    <Cell><Data ss:Type="Number">28396394</Data></Cell>
+    <Cell><Data ss:Type="Number">24386015</Data></Cell>
+    <Cell><Data ss:Type="Number">22965174</Data></Cell>
+    <Cell><Data ss:Type="Number">25427132</Data></Cell>
+    <Cell><Data ss:Type="Number">25738609</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">26428740.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5103</Data></Cell>
+    <Cell><Data ss:Type="String">CONCÓN</Data></Cell>
+    <Cell><Data ss:Type="Number">14266237</Data></Cell>
+    <Cell><Data ss:Type="Number">11953057</Data></Cell>
+    <Cell><Data ss:Type="Number">9678668</Data></Cell>
+    <Cell><Data ss:Type="Number">8411017</Data></Cell>
+    <Cell><Data ss:Type="Number">10203493</Data></Cell>
+    <Cell><Data ss:Type="Number">8500485</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">10502159.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5109</Data></Cell>
+    <Cell><Data ss:Type="String">VIÑA DEL MAR</Data></Cell>
+    <Cell><Data ss:Type="Number">97734155</Data></Cell>
+    <Cell><Data ss:Type="Number">83985932</Data></Cell>
+    <Cell><Data ss:Type="Number">63139305</Data></Cell>
+    <Cell><Data ss:Type="Number">52210264</Data></Cell>
+    <Cell><Data ss:Type="Number">72661171</Data></Cell>
+    <Cell><Data ss:Type="Number">78202635</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">74655577</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5301</Data></Cell>
+    <Cell><Data ss:Type="String">LOS ANDES</Data></Cell>
+    <Cell><Data ss:Type="Number">6451780</Data></Cell>
+    <Cell><Data ss:Type="Number">5612060</Data></Cell>
+    <Cell><Data ss:Type="Number">5155003</Data></Cell>
+    <Cell><Data ss:Type="Number">4604735</Data></Cell>
+    <Cell><Data ss:Type="Number">4865905</Data></Cell>
+    <Cell><Data ss:Type="Number">4645895</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">5222563</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5401</Data></Cell>
+    <Cell><Data ss:Type="String">LA LIGUA</Data></Cell>
+    <Cell><Data ss:Type="Number">3446070</Data></Cell>
+    <Cell><Data ss:Type="Number">3099116</Data></Cell>
+    <Cell><Data ss:Type="Number">2298635</Data></Cell>
+    <Cell><Data ss:Type="Number">2054672</Data></Cell>
+    <Cell><Data ss:Type="Number">2383557</Data></Cell>
+    <Cell><Data ss:Type="Number">2071141</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">2558865.1666666665</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5501</Data></Cell>
+    <Cell><Data ss:Type="String">QUILLOTA</Data></Cell>
+    <Cell><Data ss:Type="Number">8793033</Data></Cell>
+    <Cell><Data ss:Type="Number">7347986</Data></Cell>
+    <Cell><Data ss:Type="Number">6116414</Data></Cell>
+    <Cell><Data ss:Type="Number">5847935</Data></Cell>
+    <Cell><Data ss:Type="Number">5700325</Data></Cell>
+    <Cell><Data ss:Type="Number">5332847</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">6523090</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5601</Data></Cell>
+    <Cell><Data ss:Type="String">SAN ANTONIO</Data></Cell>
+    <Cell><Data ss:Type="Number">11403479</Data></Cell>
+    <Cell><Data ss:Type="Number">9474049</Data></Cell>
+    <Cell><Data ss:Type="Number">7678088</Data></Cell>
+    <Cell><Data ss:Type="Number">7432215</Data></Cell>
+    <Cell><Data ss:Type="Number">8337983</Data></Cell>
+    <Cell><Data ss:Type="Number">8487794</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">8802268</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5701</Data></Cell>
+    <Cell><Data ss:Type="String">SAN FELIPE</Data></Cell>
+    <Cell><Data ss:Type="Number">6717066</Data></Cell>
+    <Cell><Data ss:Type="Number">5324025</Data></Cell>
+    <Cell><Data ss:Type="Number">4979189</Data></Cell>
+    <Cell><Data ss:Type="Number">4734414</Data></Cell>
+    <Cell><Data ss:Type="Number">4916318</Data></Cell>
+    <Cell><Data ss:Type="Number">4985728</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">5276123.333333333</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5801</Data></Cell>
+    <Cell><Data ss:Type="String">QUILPUÉ</Data></Cell>
+    <Cell><Data ss:Type="Number">11994355</Data></Cell>
+    <Cell><Data ss:Type="Number">9797691</Data></Cell>
+    <Cell><Data ss:Type="Number">8760986</Data></Cell>
+    <Cell><Data ss:Type="Number">8091591</Data></Cell>
+    <Cell><Data ss:Type="Number">8678205</Data></Cell>
+    <Cell><Data ss:Type="Number">8369150</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">9281996.333333334</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5804</Data></Cell>
+    <Cell><Data ss:Type="String">VILLA ALEMANA</Data></Cell>
+    <Cell><Data ss:Type="Number">8535643</Data></Cell>
+    <Cell><Data ss:Type="Number">6437164</Data></Cell>
+    <Cell><Data ss:Type="Number">5097685</Data></Cell>
+    <Cell><Data ss:Type="Number">4326818</Data></Cell>
+    <Cell><Data ss:Type="Number">4919300</Data></Cell>
+    <Cell><Data ss:Type="Number">4681875</Data></Cell>
+    <Cell ss:Formula="=(RC[-6]+RC[-5]+RC[-4]+RC[-3]+RC[-2]+RC[-1])/6"><Data
+      ss:Type="Number">5666414.166666667</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0"/>
+    <Footer x:Margin="0"/>
+    <PageMargins x:Bottom="0.98" x:Left="0.79" x:Right="0.79" x:Top="0.98"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>12</ActiveRow>
+     <ActiveCol>8</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

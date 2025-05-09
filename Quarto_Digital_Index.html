@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -457,203 +491,6 @@ F-statistic: 27.72 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = useweb ~ dig_mun + ingresos + sex + age + SES + 
-    education + ope1 + polint1 + factor(year), family = binomial, 
-    data = EOP)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--2.0881  -0.8979  -0.5130   1.0005   2.4585  
-
-Coefficients:
-                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)       0.669631   0.463267   1.445  0.14833    
-dig_mun           2.116871   0.329828   6.418 1.38e-10 ***
-ingresos         -0.258097   0.034565  -7.467 8.20e-14 ***
-sex               0.204991   0.049462   4.144 3.41e-05 ***
-age              -0.020517   0.001475 -13.910  &lt; 2e-16 ***
-SES               0.063337   0.032112   1.972  0.04856 *  
-education         0.268587   0.015182  17.691  &lt; 2e-16 ***
-ope1             -0.001315   0.020926  -0.063  0.94991    
-polint1           0.388400   0.026798  14.494  &lt; 2e-16 ***
-factor(year)2019  0.098047   0.084914   1.155  0.24823    
-factor(year)2020  0.057333   0.085835   0.668  0.50417    
-factor(year)2021  0.235920   0.084848   2.781  0.00543 ** 
-factor(year)2022 -0.055524   0.084761  -0.655  0.51242    
-factor(year)2023  0.239818   0.084472   2.839  0.00453 ** 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 12124  on 9006  degrees of freedom
-Residual deviance: 10255  on 8993  degrees of freedom
-  (917 observations deleted due to missingness)
-AIC: 10283
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = useadm ~ dig_mun + ingresos + sex + age + SES + 
-    education + ope1 + polint1 + factor(year), family = binomial, 
-    data = EOP)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.8200  -1.2337   0.8124   1.0032   1.5395  
-
-Coefficients:
-                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)      -0.716416   0.691695  -1.036  0.30032    
-dig_mun           0.940059   0.478421   1.965  0.04942 *  
-ingresos         -0.026864   0.050712  -0.530  0.59630    
-sex              -0.359459   0.072696  -4.945 7.63e-07 ***
-age               0.002282   0.002407   0.948  0.34320    
-SES               0.021366   0.045975   0.465  0.64213    
-education         0.070633   0.022507   3.138  0.00170 ** 
-ope1             -0.086474   0.030155  -2.868  0.00414 ** 
-polint1           0.048174   0.037623   1.280  0.20039    
-factor(year)2019  0.613936   0.124925   4.914 8.90e-07 ***
-factor(year)2020  0.263683   0.123956   2.127  0.03340 *  
-factor(year)2021  0.868788   0.123201   7.052 1.77e-12 ***
-factor(year)2022  0.806193   0.127752   6.311 2.78e-10 ***
-factor(year)2023  1.101731   0.126573   8.704  &lt; 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 4862.7  on 3598  degrees of freedom
-Residual deviance: 4684.1  on 3585  degrees of freedom
-  (6325 observations deleted due to missingness)
-AIC: 4712.1
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = useinfo ~ dig_mun + ingresos + sex + age + SES + 
-    education + ope1 + polint1 + factor(year), family = binomial, 
-    data = EOP)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--2.1817   0.4927   0.6305   0.7316   1.1399  
-
-Coefficients:
-                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)       0.902743   0.801048   1.127 0.259763    
-dig_mun           0.451016   0.564165   0.799 0.424035    
-ingresos         -0.063853   0.058809  -1.086 0.277581    
-sex               0.283502   0.083980   3.376 0.000736 ***
-age              -0.004302   0.002779  -1.548 0.121538    
-SES              -0.089107   0.055250  -1.613 0.106790    
-education         0.061198   0.026703   2.292 0.021915 *  
-ope1              0.004062   0.035378   0.115 0.908587    
-polint1           0.234622   0.044661   5.253 1.49e-07 ***
-factor(year)2019  0.960882   0.149990   6.406 1.49e-10 ***
-factor(year)2020  0.199377   0.135176   1.475 0.140228    
-factor(year)2021  0.507321   0.136087   3.728 0.000193 ***
-factor(year)2022  0.602532   0.143986   4.185 2.86e-05 ***
-factor(year)2023  0.748354   0.140264   5.335 9.54e-08 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 3811.4  on 3599  degrees of freedom
-Residual deviance: 3700.6  on 3586  degrees of freedom
-  (6324 observations deleted due to missingness)
-AIC: 3728.6
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = usetransp ~ dig_mun + ingresos + sex + age + SES + 
-    education + ope1 + polint1 + factor(year), family = binomial, 
-    data = EOP)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.4975  -0.8529  -0.7447   1.2774   1.9611  
-
-Coefficients:
-                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)       2.297178   0.743561   3.089  0.00201 ** 
-dig_mun          -0.132567   0.504660  -0.263  0.79279    
-ingresos         -0.120432   0.054416  -2.213  0.02688 *  
-sex               0.081365   0.076637   1.062  0.28837    
-age              -0.006758   0.002561  -2.638  0.00833 ** 
-SES              -0.104425   0.048189  -2.167  0.03023 *  
-education        -0.023066   0.023701  -0.973  0.33045    
-ope1              0.054706   0.031774   1.722  0.08512 .  
-polint1           0.187025   0.039903   4.687 2.77e-06 ***
-factor(year)2019 -0.847531   0.128260  -6.608 3.90e-11 ***
-factor(year)2020 -1.062510   0.130671  -8.131 4.25e-16 ***
-factor(year)2021 -1.106647   0.127535  -8.677  &lt; 2e-16 ***
-factor(year)2022 -0.962728   0.131162  -7.340 2.14e-13 ***
-factor(year)2023 -1.068093   0.129171  -8.269  &lt; 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 4454.3  on 3599  degrees of freedom
-Residual deviance: 4302.2  on 3586  degrees of freedom
-  (6324 observations deleted due to missingness)
-AIC: 4330.2
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = useother ~ dig_mun + ingresos + sex + age + SES + 
-    education + ope1 + polint1 + factor(year), family = binomial, 
-    data = EOP)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.4111  -0.8572  -0.6969   1.2215   2.1178  
-
-Coefficients:
-                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)       1.774523   0.754089   2.353  0.01861 *  
-dig_mun           2.283555   0.523149   4.365 1.27e-05 ***
-ingresos         -0.293450   0.055653  -5.273 1.34e-07 ***
-sex               0.050999   0.077234   0.660  0.50905    
-age              -0.004268   0.002588  -1.649  0.09913 .  
-SES              -0.063457   0.048860  -1.299  0.19403    
-education         0.062894   0.024348   2.583  0.00979 ** 
-ope1              0.088835   0.032222   2.757  0.00583 ** 
-polint1           0.114505   0.040192   2.849  0.00439 ** 
-factor(year)2019  0.787863   0.135643   5.808 6.31e-09 ***
-factor(year)2020 -0.051913   0.142060  -0.365  0.71479    
-factor(year)2021 -0.165953   0.140291  -1.183  0.23684    
-factor(year)2022 -0.324393   0.149306  -2.173  0.02981 *  
-factor(year)2023  0.922752   0.133330   6.921 4.49e-12 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 4441.2  on 3575  degrees of freedom
-Residual deviance: 4220.2  on 3562  degrees of freedom
-  (6348 observations deleted due to missingness)
-AIC: 4248.2
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
 glm(formula = useweb_nona ~ dig_mun + ingresos + sex + age + 
     SES + education + ope1 + intpol + factor(year), family = binomial, 
     data = EOP_nona)
@@ -841,12 +678,686 @@ AIC: 5932.9
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = use ~ dig_mun + ingresos + sex + age + SES + education + 
+    ope1 + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.43088 -0.17654 -0.07123  0.17153  0.76188 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       0.2084018  0.0491781   4.238 2.28e-05 ***
+dig_mun           0.2159999  0.0344292   6.274 3.69e-10 ***
+ingresos         -0.0283480  0.0036206  -7.830 5.46e-15 ***
+sex               0.0168918  0.0051847   3.258  0.00113 ** 
+age              -0.0018655  0.0001551 -12.025  &lt; 2e-16 ***
+SES               0.0021452  0.0034589   0.620  0.53515    
+education         0.0269956  0.0015826  17.058  &lt; 2e-16 ***
+ope1              0.0038472  0.0021819   1.763  0.07789 .  
+intpol            0.0889216  0.0056985  15.604  &lt; 2e-16 ***
+factor(year)2019  0.0443900  0.0088477   5.017 5.35e-07 ***
+factor(year)2020  0.0036729  0.0089602   0.410  0.68188    
+factor(year)2021  0.0431542  0.0088992   4.849 1.26e-06 ***
+factor(year)2022  0.0156706  0.0088061   1.780  0.07519 .  
+factor(year)2023  0.0614807  0.0089592   6.862 7.24e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2367 on 8773 degrees of freedom
+Multiple R-squared:  0.1635,    Adjusted R-squared:  0.1623 
+F-statistic: 131.9 on 13 and 8773 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
 </div>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>[The results are consistent with previous literature. Marginalised areas—those with poorer municipalities—tend to view the Internet as a useful tool and are more likely to engage. At the same time, municipal digitalisation significantly impacts this engagement, which goes beyond simply requesting documents and completing administrative tasks to include accountability and accessing municipal information. It’s not about wealthy municipalities but rather about those that make an effort to digitalise.]</p>
+<section id="individual-analysis---to-report" class="level5">
+<h5 class="anchored" data-anchor-id="individual-analysis---to-report">INDIVIDUAL ANALYSIS - TO REPORT</h5>
+</section>
+</section>
+<section id="testing-with-real-income-2018-2023" class="level2">
+<h2 class="anchored" data-anchor-id="testing-with-real-income-2018-2023">Testing with real income 2018-2023</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>modela_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.08658 -0.58395 -0.02749  0.60391  2.74579 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        0.3138541  0.1621377   1.936 0.052933 .  
+dig_mun            0.1836980  0.1213143   1.514 0.130003    
+log_ingresos_real -0.0279262  0.0124830  -2.237 0.025302 *  
+sex               -0.1221419  0.0178191  -6.855 7.64e-12 ***
+age               -0.0053530  0.0005332 -10.039  &lt; 2e-16 ***
+SES                0.0337390  0.0119056   2.834 0.004609 ** 
+education          0.0183040  0.0054467   3.361 0.000781 ***
+intpol             0.3904228  0.0193634  20.163  &lt; 2e-16 ***
+factor(year)2019   0.0402180  0.0304669   1.320 0.186851    
+factor(year)2020   0.1766173  0.0308558   5.724 1.07e-08 ***
+factor(year)2021   0.2358038  0.0305821   7.711 1.39e-14 ***
+factor(year)2022   0.1687303  0.0303879   5.553 2.90e-08 ***
+factor(year)2023   0.1861565  0.0311285   5.980 2.31e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8151 on 8774 degrees of freedom
+Multiple R-squared:  0.1022,    Adjusted R-squared:  0.1009 
+F-statistic:  83.2 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>modelb_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope1 <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelb_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope1 ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.3030 -0.8243 -0.2276  0.9383  3.3460 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        2.5540347  0.2303965  11.085  &lt; 2e-16 ***
+dig_mun            0.3681049  0.1723867   2.135 0.032761 *  
+log_ingresos_real -0.0227264  0.0177382  -1.281 0.200154    
+sex               -0.1458109  0.0253208  -5.759 8.77e-09 ***
+age               -0.0043021  0.0007577  -5.678 1.41e-08 ***
+SES                0.0436365  0.0169178   2.579 0.009915 ** 
+education          0.0223831  0.0077398   2.892 0.003838 ** 
+intpol             0.4221601  0.0275152  15.343  &lt; 2e-16 ***
+factor(year)2019   0.0200151  0.0432932   0.462 0.643866    
+factor(year)2020   0.1689619  0.0438458   3.854 0.000117 ***
+factor(year)2021   0.2575875  0.0434570   5.927 3.19e-09 ***
+factor(year)2022   0.1526748  0.0431810   3.536 0.000409 ***
+factor(year)2023   0.1711198  0.0442334   3.869 0.000110 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.158 on 8774 degrees of freedom
+Multiple R-squared:  0.06237,   Adjusted R-squared:  0.06108 
+F-statistic: 48.63 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>modelc_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope2 <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelc_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope2 ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.5953 -0.9207 -0.0641  1.0007  3.2165 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        3.1736530  0.2363630  13.427  &lt; 2e-16 ***
+dig_mun            0.1972689  0.1768510   1.115   0.2647    
+log_ingresos_real -0.0317399  0.0181976  -1.744   0.0812 .  
+sex               -0.1555127  0.0259766  -5.987 2.23e-09 ***
+age               -0.0067916  0.0007773  -8.737  &lt; 2e-16 ***
+SES                0.0344686  0.0173559   1.986   0.0471 *  
+education          0.0209949  0.0079402   2.644   0.0082 ** 
+intpol             0.5013642  0.0282278  17.761  &lt; 2e-16 ***
+factor(year)2019   0.0681716  0.0444144   1.535   0.1248    
+factor(year)2020   0.2448802  0.0449813   5.444 5.35e-08 ***
+factor(year)2021   0.3014695  0.0445824   6.762 1.45e-11 ***
+factor(year)2022   0.2286985  0.0442993   5.163 2.49e-07 ***
+factor(year)2023   0.2191450  0.0453789   4.829 1.39e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.188 on 8774 degrees of freedom
+Multiple R-squared:  0.07753,   Adjusted R-squared:  0.07627 
+F-statistic: 61.45 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>modeld_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope3 <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modeld_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope3 ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1359 -0.8768  0.1362  0.8874  3.3583 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        3.735472   0.228964  16.315  &lt; 2e-16 ***
+dig_mun            0.250258   0.171315   1.461  0.14410    
+log_ingresos_real -0.046720   0.017628  -2.650  0.00806 ** 
+sex               -0.160642   0.025163  -6.384 1.81e-10 ***
+age               -0.014181   0.000753 -18.833  &lt; 2e-16 ***
+SES                0.042987   0.016813   2.557  0.01058 *  
+education          0.037164   0.007692   4.832 1.38e-06 ***
+intpol             0.515928   0.027344  18.868  &lt; 2e-16 ***
+factor(year)2019   0.154877   0.043024   3.600  0.00032 ***
+factor(year)2020   0.334852   0.043573   7.685 1.70e-14 ***
+factor(year)2021   0.480109   0.043187  11.117  &lt; 2e-16 ***
+factor(year)2022   0.402983   0.042913   9.391  &lt; 2e-16 ***
+factor(year)2023   0.444662   0.043958  10.116  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.151 on 8774 degrees of freedom
+Multiple R-squared:  0.1403,    Adjusted R-squared:  0.1392 
+F-statistic: 119.3 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>modele_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope4 <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modele_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope4 ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.9109 -0.7779 -0.2593  0.7073  3.2894 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        2.9125946  0.2220073  13.119  &lt; 2e-16 ***
+dig_mun           -0.0119673  0.1661097  -0.072  0.94257    
+log_ingresos_real -0.0401690  0.0170923  -2.350  0.01879 *  
+sex               -0.0968882  0.0243989  -3.971 7.21e-05 ***
+age               -0.0003038  0.0007301  -0.416  0.67739    
+SES                0.0462790  0.0163018   2.839  0.00454 ** 
+education          0.0062745  0.0074580   0.841  0.40020    
+intpol             0.3692303  0.0265133  13.926  &lt; 2e-16 ***
+factor(year)2019  -0.0758348  0.0417168  -1.818  0.06912 .  
+factor(year)2020   0.0466537  0.0422493   1.104  0.26952    
+factor(year)2021   0.0446653  0.0418746   1.067  0.28616    
+factor(year)2022  -0.0136376  0.0416087  -0.328  0.74310    
+factor(year)2023   0.0730669  0.0426228   1.714  0.08651 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.116 on 8774 degrees of freedom
+Multiple R-squared:  0.0365,    Adjusted R-squared:  0.03518 
+F-statistic:  27.7 on 12 and 8774 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>modelf_nona_real <span class="ot">&lt;-</span> <span class="fu">glm</span>(useweb_nona <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona, <span class="at">family =</span> binomial)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelf_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = useweb_nona ~ dig_mun + log_ingresos_real + sex + 
+    age + SES + education + ope + intpol + factor(year), family = binomial, 
+    data = EOP_nona)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0390  -0.9170  -0.5129   1.0072   2.6165  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        1.180100   0.448436   2.632 0.008499 ** 
+dig_mun            2.107829   0.339595   6.207 5.40e-10 ***
+log_ingresos_real -0.253695   0.034820  -7.286 3.19e-13 ***
+sex                0.176164   0.049505   3.559 0.000373 ***
+age               -0.020295   0.001499 -13.540  &lt; 2e-16 ***
+SES                0.065282   0.032318   2.020 0.043384 *  
+education          0.277412   0.015226  18.219  &lt; 2e-16 ***
+ope                0.085168   0.029654   2.872 0.004078 ** 
+intpol             0.730417   0.057367  12.732  &lt; 2e-16 ***
+factor(year)2019   0.151036   0.085034   1.776 0.075702 .  
+factor(year)2020   0.031658   0.086079   0.368 0.713044    
+factor(year)2021   0.310666   0.085061   3.652 0.000260 ***
+factor(year)2022   0.040663   0.085198   0.477 0.633164    
+factor(year)2023   0.383481   0.086332   4.442 8.92e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 11864  on 8786  degrees of freedom
+Residual deviance: 10104  on 8773  degrees of freedom
+AIC: 10132
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>modelg_nona_real <span class="ot">&lt;-</span> <span class="fu">glm</span>(useadm_nona <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona, <span class="at">family =</span> binomial)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelg_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = useadm_nona ~ dig_mun + log_ingresos_real + sex + 
+    age + SES + education + ope + intpol + factor(year), family = binomial, 
+    data = EOP_nona)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6847  -0.7635  -0.5186  -0.2322   2.7603  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)       -0.699841   0.501788  -1.395   0.1631    
+dig_mun            2.159166   0.381490   5.660 1.52e-08 ***
+log_ingresos_real -0.211273   0.038892  -5.432 5.56e-08 ***
+sex               -0.066125   0.054179  -1.220   0.2223    
+age               -0.013808   0.001681  -8.213  &lt; 2e-16 ***
+SES                0.057807   0.035205   1.642   0.1006    
+education          0.246204   0.016983  14.497  &lt; 2e-16 ***
+ope                0.035195   0.032909   1.069   0.2849    
+intpol             0.640133   0.064984   9.851  &lt; 2e-16 ***
+factor(year)2019   0.493368   0.100944   4.888 1.02e-06 ***
+factor(year)2020   0.173136   0.103629   1.671   0.0948 .  
+factor(year)2021   0.758297   0.098776   7.677 1.63e-14 ***
+factor(year)2022   0.531488   0.100927   5.266 1.39e-07 ***
+factor(year)2023   0.949236   0.099957   9.496  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 9705.7  on 8786  degrees of freedom
+Residual deviance: 8606.0  on 8773  degrees of freedom
+AIC: 8634
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>modelh_nona_real <span class="ot">&lt;-</span> <span class="fu">glm</span>(useinfo_nona <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona, <span class="at">family =</span> binomial)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelh_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = useinfo_nona ~ dig_mun + log_ingresos_real + sex + 
+    age + SES + education + ope + intpol + factor(year), family = binomial, 
+    data = EOP_nona)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7925  -0.8491  -0.5412   1.0510   2.7287  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        0.546771   0.468594   1.167 0.243278    
+dig_mun            1.911490   0.354132   5.398 6.75e-08 ***
+log_ingresos_real -0.236131   0.036385  -6.490 8.60e-11 ***
+sex                0.240881   0.051482   4.679 2.88e-06 ***
+age               -0.018900   0.001575 -12.002  &lt; 2e-16 ***
+SES                0.017189   0.033125   0.519 0.603825    
+education          0.254644   0.015807  16.109  &lt; 2e-16 ***
+ope                0.109420   0.030800   3.553 0.000381 ***
+intpol             0.828040   0.061062  13.561  &lt; 2e-16 ***
+factor(year)2019   0.499508   0.090183   5.539 3.04e-08 ***
+factor(year)2020   0.099366   0.092301   1.077 0.281682    
+factor(year)2021   0.469426   0.090191   5.205 1.94e-07 ***
+factor(year)2022   0.298602   0.091204   3.274 0.001060 ** 
+factor(year)2023   0.643653   0.091505   7.034 2.01e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 10948.0  on 8786  degrees of freedom
+Residual deviance:  9512.4  on 8773  degrees of freedom
+AIC: 9540.4
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>modeli_nona_real <span class="ot">&lt;-</span> <span class="fu">glm</span>(usetransp_nona <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona, <span class="at">family =</span> binomial)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modeli_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = usetransp_nona ~ dig_mun + log_ingresos_real + 
+    sex + age + SES + education + ope + intpol + factor(year), 
+    family = binomial, data = EOP_nona)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.2653  -0.5700  -0.4233  -0.2849   2.8618  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        1.34841    0.62867   2.145  0.03196 *  
+dig_mun            0.99775    0.46824   2.131  0.03310 *  
+log_ingresos_real -0.21803    0.04899  -4.451 8.55e-06 ***
+sex                0.15498    0.06848   2.263  0.02363 *  
+age               -0.01990    0.00216  -9.214  &lt; 2e-16 ***
+SES               -0.04779    0.04304  -1.110  0.26679    
+education          0.15674    0.02086   7.515 5.71e-14 ***
+ope                0.13298    0.04086   3.255  0.00113 ** 
+intpol             0.96316    0.08521  11.304  &lt; 2e-16 ***
+factor(year)2019  -0.50011    0.10961  -4.563 5.05e-06 ***
+factor(year)2020  -0.81633    0.11378  -7.175 7.25e-13 ***
+factor(year)2021  -0.66333    0.11106  -5.973 2.33e-09 ***
+factor(year)2022  -0.66299    0.11278  -5.879 4.14e-09 ***
+factor(year)2023  -0.55302    0.11517  -4.802 1.57e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 6654.8  on 8786  degrees of freedom
+Residual deviance: 6111.4  on 8773  degrees of freedom
+AIC: 6139.4
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>modelj_nona_real <span class="ot">&lt;-</span> <span class="fu">glm</span>(useother_nona <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona, <span class="at">family =</span> binomial)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelj_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = useother_nona ~ dig_mun + log_ingresos_real + sex + 
+    age + SES + education + ope + intpol + factor(year), family = binomial, 
+    data = EOP_nona)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3631  -0.5627  -0.3901  -0.2473   2.9316  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        1.218495   0.653695   1.864   0.0623 .  
+dig_mun            3.324581   0.495082   6.715 1.88e-11 ***
+log_ingresos_real -0.394456   0.051216  -7.702 1.34e-14 ***
+sex                0.143215   0.069221   2.069   0.0385 *  
+age               -0.017069   0.002179  -7.834 4.72e-15 ***
+SES               -0.003923   0.043532  -0.090   0.9282    
+education          0.213807   0.021461   9.963  &lt; 2e-16 ***
+ope                0.090065   0.041931   2.148   0.0317 *  
+intpol             0.864697   0.086263  10.024  &lt; 2e-16 ***
+factor(year)2019   0.779939   0.121816   6.403 1.53e-10 ***
+factor(year)2020  -0.028504   0.131926  -0.216   0.8289    
+factor(year)2021   0.070690   0.130925   0.540   0.5892    
+factor(year)2022  -0.141092   0.139130  -1.014   0.3105    
+factor(year)2023   1.083259   0.122386   8.851  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 6643.2  on 8786  degrees of freedom
+Residual deviance: 5907.4  on 8773  degrees of freedom
+AIC: 5935.4
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>modelk_nona_real <span class="ot">&lt;-</span> <span class="fu">lm</span>(use <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> EOP_nona)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelk_nona_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = use ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + ope + intpol + factor(year), data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.43800 -0.17622 -0.06981  0.17207  0.76358 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        0.1956788  0.0470681   4.157 3.25e-05 ***
+dig_mun            0.2217469  0.0352143   6.297 3.18e-10 ***
+log_ingresos_real -0.0278394  0.0036240  -7.682 1.74e-14 ***
+sex                0.0178051  0.0051856   3.434 0.000598 ***
+age               -0.0018173  0.0001556 -11.676  &lt; 2e-16 ***
+SES                0.0018937  0.0034570   0.548 0.583852    
+education          0.0268919  0.0015819  17.000  &lt; 2e-16 ***
+ope                0.0121413  0.0030985   3.918 8.98e-05 ***
+intpol             0.0857302  0.0057487  14.913  &lt; 2e-16 ***
+factor(year)2019   0.0447386  0.0088434   5.059 4.30e-07 ***
+factor(year)2020  -0.0007684  0.0089721  -0.086 0.931751    
+factor(year)2021   0.0412170  0.0089060   4.628 3.75e-06 ***
+factor(year)2022   0.0194362  0.0088351   2.200 0.027842 *  
+factor(year)2023   0.0699375  0.0090530   7.725 1.24e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2366 on 8773 degrees of freedom
+Multiple R-squared:  0.1646,    Adjusted R-squared:  0.1633 
+F-statistic: 132.9 on 13 and 8773 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a binary variable for pre- and post-pandemic</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>EOP_nona<span class="sc">$</span>post_pandemic <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(EOP_nona<span class="sc">$</span>year <span class="sc">&lt;=</span> <span class="dv">2020</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>modela_pan <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic, <span class="at">data =</span> EOP_nona)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_pan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + post_pandemic, data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.10169 -0.58404 -0.02881  0.60523  2.86863 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        0.4683538  0.1592633   2.941  0.00328 ** 
+dig_mun            0.2304143  0.1206761   1.909  0.05625 .  
+log_ingresos_real -0.0351266  0.0123432  -2.846  0.00444 ** 
+sex               -0.1205735  0.0178380  -6.759 1.47e-11 ***
+age               -0.0053217  0.0005336  -9.974  &lt; 2e-16 ***
+SES                0.0338740  0.0119170   2.842  0.00449 ** 
+education          0.0187347  0.0054572   3.433  0.00060 ***
+intpol             0.4041870  0.0192557  20.991  &lt; 2e-16 ***
+post_pandemic      0.1254509  0.0176213   7.119 1.17e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8169 on 8778 degrees of freedom
+Multiple R-squared:  0.09793,   Adjusted R-squared:  0.09711 
+F-statistic: 119.1 on 8 and 8778 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>modela_pan_int1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic <span class="sc">+</span> log_ingresos_real <span class="sc">*</span> post_pandemic , <span class="at">data =</span> EOP_nona)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_pan_int1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + post_pandemic + log_ingresos_real * 
+    post_pandemic, data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.13048 -0.57836 -0.02439  0.60081  2.85978 
+
+Coefficients:
+                                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      1.0018357  0.2073626   4.831 1.38e-06 ***
+dig_mun                          0.2292225  0.1205729   1.901 0.057320 .  
+log_ingresos_real               -0.0678727  0.0147885  -4.590 4.50e-06 ***
+sex                             -0.1200441  0.0178231  -6.735 1.74e-11 ***
+age                             -0.0053302  0.0005331  -9.999  &lt; 2e-16 ***
+SES                              0.0341294  0.0119070   2.866 0.004162 ** 
+education                        0.0186375  0.0054526   3.418 0.000633 ***
+intpol                           0.4058642  0.0192437  21.091  &lt; 2e-16 ***
+post_pandemic                   -0.9708419  0.2737936  -3.546 0.000393 ***
+log_ingresos_real:post_pandemic  0.0669685  0.0166904   4.012 6.06e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8162 on 8777 degrees of freedom
+Multiple R-squared:  0.09958,   Adjusted R-squared:  0.09866 
+F-statistic: 107.9 on 9 and 8777 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>modela_pan_int2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ope <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic <span class="sc">+</span> dig_mun <span class="sc">*</span> post_pandemic , <span class="at">data =</span> EOP_nona)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_pan_int2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ope ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + intpol + post_pandemic + dig_mun * post_pandemic, 
+    data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.11923 -0.58031 -0.02571  0.60281  2.85031 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            0.5579437  0.1667286   3.346 0.000822 ***
+dig_mun                0.0762032  0.1476112   0.516 0.605698    
+log_ingresos_real     -0.0344183  0.0123477  -2.787 0.005324 ** 
+sex                   -0.1208453  0.0178363  -6.775 1.32e-11 ***
+age                   -0.0053251  0.0005335  -9.982  &lt; 2e-16 ***
+SES                    0.0337035  0.0119158   2.828 0.004688 ** 
+education              0.0187279  0.0054565   3.432 0.000601 ***
+intpol                 0.4045632  0.0192543  21.012  &lt; 2e-16 ***
+post_pandemic         -0.0666476  0.1073761  -0.621 0.534818    
+dig_mun:post_pandemic  0.2953475  0.1628510   1.814 0.069773 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8168 on 8777 degrees of freedom
+Multiple R-squared:  0.09827,   Adjusted R-squared:  0.09734 
+F-statistic: 106.3 on 9 and 8777 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">interact_plot</span>(<span class="at">model =</span> modela_pan_int1, <span class="at">pred =</span> <span class="st">"log_ingresos_real"</span>, <span class="at">modx =</span> <span class="st">"post_pandemic"</span>, </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">interval =</span> <span class="cn">TRUE</span>, <span class="at">x.label =</span> <span class="st">"Income"</span>, <span class="at">y.label =</span> <span class="st">"OPE"</span>, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">modx.labels =</span> <span class="fu">c</span>(<span class="st">"Pre-Pandemic"</span>, <span class="st">"Post-Pandemic"</span>))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Quarto_Digital_Index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">interact_plot</span>(<span class="at">model =</span> modela_pan_int2, <span class="at">pred =</span> <span class="st">"dig_mun"</span>, <span class="at">modx =</span> <span class="st">"post_pandemic"</span>, </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">interval =</span> <span class="cn">TRUE</span>, <span class="at">x.label =</span> <span class="st">"Digitalised Municipality"</span>, <span class="at">y.label =</span> <span class="st">"OPE"</span>, </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">modx.labels =</span> <span class="fu">c</span>(<span class="st">"Pre-Pandemic"</span>, <span class="st">"Post-Pandemic"</span>))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Quarto_Digital_Index_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>modelk_pan <span class="ot">&lt;-</span> <span class="fu">lm</span>(use <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic, <span class="at">data =</span> EOP_nona)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelk_pan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = use ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + ope + intpol + post_pandemic, data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.42265 -0.17663 -0.07214  0.17407  0.76328 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        0.180066   0.046318   3.888 0.000102 ***
+dig_mun            0.200175   0.035086   5.705 1.20e-08 ***
+log_ingresos_real -0.025465   0.003590  -7.094 1.40e-12 ***
+sex                0.016760   0.005199   3.224 0.001269 ** 
+age               -0.001754   0.000156 -11.248  &lt; 2e-16 ***
+SES                0.003210   0.003466   0.926 0.354412    
+education          0.026914   0.001587  16.955  &lt; 2e-16 ***
+ope                0.011849   0.003103   3.819 0.000135 ***
+intpol             0.082989   0.005736  14.468  &lt; 2e-16 ***
+post_pandemic      0.027145   0.005137   5.284 1.29e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2375 on 8777 degrees of freedom
+Multiple R-squared:  0.158, Adjusted R-squared:  0.1572 
+F-statistic: 183.1 on 9 and 8777 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>modela_pan_int3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(use <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic <span class="sc">+</span> log_ingresos_real <span class="sc">*</span> post_pandemic , <span class="at">data =</span> EOP_nona)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_pan_int3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = use ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + ope + intpol + post_pandemic + log_ingresos_real * 
+    post_pandemic, data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.42076 -0.17667 -0.07225  0.17453  0.76505 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      0.239200   0.060404   3.960 7.55e-05 ***
+dig_mun                          0.200090   0.035083   5.703 1.21e-08 ***
+log_ingresos_real               -0.029097   0.004307  -6.755 1.52e-11 ***
+sex                              0.016794   0.005198   3.231 0.001240 ** 
+age                             -0.001756   0.000156 -11.261  &lt; 2e-16 ***
+SES                              0.003245   0.003465   0.936 0.349144    
+education                        0.026907   0.001587  16.952  &lt; 2e-16 ***
+ope                              0.011647   0.003105   3.751 0.000177 ***
+intpol                           0.083257   0.005738  14.509  &lt; 2e-16 ***
+post_pandemic                   -0.094152   0.079706  -1.181 0.237542    
+log_ingresos_real:post_pandemic  0.007411   0.004860   1.525 0.127303    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2374 on 8776 degrees of freedom
+Multiple R-squared:  0.1583,    Adjusted R-squared:  0.1573 
+F-statistic:   165 on 10 and 8776 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>modela_pan_int4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(use <span class="sc">~</span> dig_mun <span class="sc">+</span> log_ingresos_real <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> SES <span class="sc">+</span> education <span class="sc">+</span> ope <span class="sc">+</span> intpol <span class="sc">+</span> post_pandemic <span class="sc">+</span> dig_mun <span class="sc">*</span> post_pandemic , <span class="at">data =</span> EOP_nona)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modela_pan_int4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = use ~ dig_mun + log_ingresos_real + sex + age + 
+    SES + education + ope + intpol + post_pandemic + dig_mun * 
+    post_pandemic, data = EOP_nona)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.42750 -0.17680 -0.07158  0.17475  0.75816 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            0.2319383  0.0484691   4.785 1.74e-06 ***
+dig_mun                0.1111118  0.0428849   2.591 0.009587 ** 
+log_ingresos_real     -0.0250638  0.0035889  -6.984 3.08e-12 ***
+sex                    0.0165765  0.0051954   3.191 0.001425 ** 
+age                   -0.0017574  0.0001559 -11.275  &lt; 2e-16 ***
+SES                    0.0031184  0.0034634   0.900 0.367938    
+education              0.0269142  0.0015863  16.967  &lt; 2e-16 ***
+ope                    0.0116326  0.0031010   3.751 0.000177 ***
+intpol                 0.0832944  0.0057327  14.530  &lt; 2e-16 ***
+post_pandemic         -0.0838341  0.0311957  -2.687 0.007216 ** 
+dig_mun:post_pandemic  0.1706703  0.0473206   3.607 0.000312 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2373 on 8776 degrees of freedom
+Multiple R-squared:  0.1593,    Adjusted R-squared:  0.1583 
+F-statistic: 166.3 on 10 and 8776 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">interact_plot</span>(<span class="at">model =</span> modela_pan_int3, <span class="at">pred =</span> <span class="st">"log_ingresos_real"</span>, <span class="at">modx =</span> <span class="st">"post_pandemic"</span>, </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">interval =</span> <span class="cn">TRUE</span>, <span class="at">x.label =</span> <span class="st">"Income"</span>, <span class="at">y.label =</span> <span class="st">"Use of Mun. Website"</span>, </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">modx.labels =</span> <span class="fu">c</span>(<span class="st">"Pre-Pandemic"</span>, <span class="st">"Post-Pandemic"</span>))</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Quarto_Digital_Index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">interact_plot</span>(<span class="at">model =</span> modela_pan_int4, <span class="at">pred =</span> <span class="st">"dig_mun"</span>, <span class="at">modx =</span> <span class="st">"post_pandemic"</span>, </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">interval =</span> <span class="cn">TRUE</span>, <span class="at">x.label =</span> <span class="st">"Digitalised Municipality"</span>, <span class="at">y.label =</span> <span class="st">"Use of Mun. Website"</span>, </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">modx.labels =</span> <span class="fu">c</span>(<span class="st">"Pre-Pandemic"</span>, <span class="st">"Post-Pandemic"</span>))</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Quarto_Digital_Index_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 

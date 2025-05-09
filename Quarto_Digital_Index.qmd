@@ -6,26 +6,25 @@ editor: visual
 
 # Municipality digitalization and local engagement: The case of Chile
 
-Pedro Fierro
-Ellen Helsper
+Pedro Fierro Ellen Helsper
 
 ## Abstract
 
-This paper analyses the elements and contextual factors related to the digitalisation of local governments and examines the impacts of municipal digitalisation on political engagement—both attitudinal and behavioural. Our findings are twofold. First, at the national level, considering 343 local administrations, the results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, whereas in central Chile, income and workforce factors play a greater role. Second, based on 9,924 face-to-face cases collected in Chile’s Valparaíso region from 2018 to 2024, results indicate that living in a digitalised municipality positively and meaningfully influences not only the likelihood of using digital services but also the belief that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement. These findings are important for understanding democratisation and the role of local government modernisation, as well as for addressing the causes and direct consequences of digital inequalities.
+This paper analyses the elements and contextual factors related to the digitalisation of local governments and examines the impacts of municipal digitalisation on political engagement---both attitudinal and behavioural. Our findings are twofold. First, at the national level, considering 343 local administrations, the results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, whereas in central Chile, income and workforce factors play a greater role. Second, based on 9,924 face-to-face cases collected in Chile's Valparaíso region from 2018 to 2024, results indicate that living in a digitalised municipality positively and meaningfully influences not only the likelihood of using digital services but also the belief that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement. These findings are important for understanding democratisation and the role of local government modernisation, as well as for addressing the causes and direct consequences of digital inequalities.
 
 **Keywords:** local governments; digital inequalities; democratisation; civic engagement; online participation
 
 ## Introduction
 
-One of the major challenges faced by both emerging and established democracies is the modernization of local governments, with digitalization as a core component. Digitalization not only aims to make processes more efficient and faster but also seeks to bring the entire state structure closer to individuals, potentially fostering higher levels of civic engagement. Increasingly, research suggests that citizens in “left-behind” areas experience greater political disengagement and negative sentiments toward politics and its processes.
-Chile, our case study, is no exception, especially given the pronounced centralism that has long shaped the state, resulting in diverse citizen experiences depending on geographic location. Within this context, digitalization has become a priority for policymakers; however, its broader consequences are not always fully appreciated.
+One of the major challenges faced by both emerging and established democracies is the modernization of local governments, with digitalization as a core component. Digitalization not only aims to make processes more efficient and faster but also seeks to bring the entire state structure closer to individuals, potentially fostering higher levels of civic engagement. Increasingly, research suggests that citizens in "left-behind" areas experience greater political disengagement and negative sentiments toward politics and its processes. Chile, our case study, is no exception, especially given the pronounced centralism that has long shaped the state, resulting in diverse citizen experiences depending on geographic location. Within this context, digitalization has become a priority for policymakers; however, its broader consequences are not always fully appreciated.
 
 This paper has a dual objective. First, it seeks to identify the factors that may explain the digitalisation of local governments. Second, it examines, at an individual level, the effects of these digitalisation processes on political engagement, both in terms of attitudes and behaviours.
 
-	To achieve these objectives, we use official data from the Chilean government and the Digital Municipal Index, recently developed by the Millennium Nucleus of Inequalities and Digital Opportunities (NUDOS). Additionally, to analyse the phenomenon at the individual level, we draw on survey data from 9,924 face-to-face interviews conducted by Fundación P! ensa in the Valparaíso region of Chile. Our findings are twofold. First, at the national level, examining 343 local administrations, results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, while in central Chile, income and workforce factors are more critical. Second, at the individual level, results indicate that individuals living in a municipality with a digitalised local government are more likely to use official digital services and, more importantly, are more inclined to believe that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement.
-	
-	These findings contribute not only to understanding the causes and consequences of digitalisation processes in an emerging democracy like Chile but also offer insight into the impact of digital inequalities. Since the beginning of the “electronic revolution,” the Internet was envisioned as a tool to transcend physical boundaries and foster the inclusion of politically marginalised areas. Over time, however, the reinforcement thesis—suggesting that offline inequalities are simply replicated online—has gained traction. The results of this study offer pathways for achieving greater inclusion in the digital age.
+```         
+To achieve these objectives, we use official data from the Chilean government and the Digital Municipal Index, recently developed by the Millennium Nucleus of Inequalities and Digital Opportunities (NUDOS). Additionally, to analyse the phenomenon at the individual level, we draw on survey data from 9,924 face-to-face interviews conducted by Fundación P! ensa in the Valparaíso region of Chile. Our findings are twofold. First, at the national level, examining 343 local administrations, results suggest that population size, rurality, municipal income, and professional workforce are associated with the level of digitalisation in each municipality, though these relationships vary by region. In southern Chile, population size and municipal income appear more influential, while in central Chile, income and workforce factors are more critical. Second, at the individual level, results indicate that individuals living in a municipality with a digitalised local government are more likely to use official digital services and, more importantly, are more inclined to believe that the Internet empowers citizens politically. Conversely, living in a municipality with a wealthy local government shows an opposite relationship, suggesting that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement.
 
+These findings contribute not only to understanding the causes and consequences of digitalisation processes in an emerging democracy like Chile but also offer insight into the impact of digital inequalities. Since the beginning of the “electronic revolution,” the Internet was envisioned as a tool to transcend physical boundaries and foster the inclusion of politically marginalised areas. Over time, however, the reinforcement thesis—suggesting that offline inequalities are simply replicated online—has gained traction. The results of this study offer pathways for achieving greater inclusion in the digital age.
+```
 
 ## Literature Review
 
@@ -81,6 +80,7 @@ library(stringi)
 library(stringr)
 library(lavaan)
 library(psych)
+library(rdrobust)
 
 ```
 
@@ -207,13 +207,11 @@ Each of these questions was measured on a 5-point Likert scale, where 1 indicate
 
 **Awareness and Use of Municipal Website**. To measure specific uses of the official local government website, respondents were asked to indicate their agreement with the following statements:
 
-1.	I am aware of the existence of the municipal website (know_web).
-2.	I have used the municipal website to complete administrative procedures and/or make service payments (use_adm).
-3.	I have used the municipal website to seek information from the municipality (use_info).
-4.	I have used the municipal website to request transparency information (use_transp).
-5.	I have used the municipal website for other purposes (use_other).
-Each of these questions was measured as a dummy variable, coded as 1 for “yes” and 0 otherwise.
-
+1.  I am aware of the existence of the municipal website (know_web).
+2.  I have used the municipal website to complete administrative procedures and/or make service payments (use_adm).
+3.  I have used the municipal website to seek information from the municipality (use_info).
+4.  I have used the municipal website to request transparency information (use_transp).
+5.  I have used the municipal website for other purposes (use_other). Each of these questions was measured as a dummy variable, coded as 1 for "yes" and 0 otherwise.
 
 **Living in a Digitalized Municipality**. To examine contextual factors that may influence our variables of interest, we included a variable to determine whether individuals live in a highly or minimally digitalized municipality. Specifically, the value of the Digital Municipality Index (measured at the municipal level) was assigned to individuals based on their place of residence. To prevent misinterpretations and ecological fallacies, it is essential to clarify that this variable represents an individual-level attribute: living in a municipality with a strong digital services offering.
 
@@ -221,11 +219,11 @@ Each of these questions was measured as a dummy variable, coded as 1 for “yes�
 
 **Political Interest**. Political interest was measured using a self-reported approach. Specifically, all respondents were asked how interested they were in the following areas:
 
-1.	Politics
-2.	Issues happening in the world
-3.	Issues happening in the country
-4.	Issues happening in their region
-5.	Issues happening in their neighbourhood
+1.  Politics
+2.  Issues happening in the world
+3.  Issues happening in the country
+4.  Issues happening in their region
+5.  Issues happening in their neighbourhood
 
 Each question was measured on a 4-point Likert scale, where 1 indicated 'no interest' and 4 indicated 'strong interest.' Using confirmatory factor analysis (CFA), a factor for political interest was constructed from these responses (Cronbach's alpha: 0.86).
 
@@ -294,6 +292,101 @@ EOP <- EOP %>%
     com10 == 1 ~ merged_data %>% filter(Comuna == "VILLA ALEMANA") %>% pull(log_Ingresos_Propios_Permanentes), # VillaAlemana
     TRUE ~ NA_real_
   ))
+
+
+EOP <- EOP %>%
+  mutate(ingresos_real = case_when(
+    # Los Andes (com1)
+    com1 == 1 & year == 2018 ~ 4645895,
+    com1 == 1 & year == 2019 ~ 4865905,
+    com1 == 1 & year == 2020 ~ 4604735,
+    com1 == 1 & year == 2021 ~ 5155003,
+    com1 == 1 & year == 2022 ~ 5612060,
+    com1 == 1 & year == 2023 ~ 6451780,
+
+    # La Ligua (com2)
+    com2 == 1 & year == 2018 ~ 2071141,
+    com2 == 1 & year == 2019 ~ 2383557,
+    com2 == 1 & year == 2020 ~ 2054672,
+    com2 == 1 & year == 2021 ~ 2298635,
+    com2 == 1 & year == 2022 ~ 3099116,
+    com2 == 1 & year == 2023 ~ 3446070,
+
+    # Quillota (com3)
+    com3 == 1 & year == 2018 ~ 5332847,
+    com3 == 1 & year == 2019 ~ 5700325,
+    com3 == 1 & year == 2020 ~ 5847935,
+    com3 == 1 & year == 2021 ~ 6116414,
+    com3 == 1 & year == 2022 ~ 7347986,
+    com3 == 1 & year == 2023 ~ 8793033,
+
+    # San Antonio (com4)
+    com4 == 1 & year == 2018 ~ 8487794,
+    com4 == 1 & year == 2019 ~ 8337983,
+    com4 == 1 & year == 2020 ~ 7432215,
+    com4 == 1 & year == 2021 ~ 7678088,
+    com4 == 1 & year == 2022 ~ 9474049,
+    com4 == 1 & year == 2023 ~ 11403479,
+
+    # San Felipe (com5)
+    com5 == 1 & year == 2018 ~ 4985728,
+    com5 == 1 & year == 2019 ~ 4916318,
+    com5 == 1 & year == 2020 ~ 4734414,
+    com5 == 1 & year == 2021 ~ 4979189,
+    com5 == 1 & year == 2022 ~ 5324025,
+    com5 == 1 & year == 2023 ~ 6717066,
+
+    # Concón (com6)
+    com6 == 1 & year == 2018 ~ 8500485,
+    com6 == 1 & year == 2019 ~ 10203493,
+    com6 == 1 & year == 2020 ~ 8411017,
+    com6 == 1 & year == 2021 ~ 9678668,
+    com6 == 1 & year == 2022 ~ 11953057,
+    com6 == 1 & year == 2023 ~ 14266237,
+
+    # Valparaíso (com7)
+    com7 == 1 & year == 2018 ~ 25738609,
+    com7 == 1 & year == 2019 ~ 25427132,
+    com7 == 1 & year == 2020 ~ 22965174,
+    com7 == 1 & year == 2021 ~ 24386015,
+    com7 == 1 & year == 2022 ~ 28396394,
+    com7 == 1 & year == 2023 ~ 31659119,
+
+    # Viña del Mar (com8)
+    com8 == 1 & year == 2018 ~ 78202635,
+    com8 == 1 & year == 2019 ~ 72661171,
+    com8 == 1 & year == 2020 ~ 52210264,
+    com8 == 1 & year == 2021 ~ 63139305,
+    com8 == 1 & year == 2022 ~ 83985932,
+    com8 == 1 & year == 2023 ~ 97734155,
+
+    # Quilpué (com9)
+    com9 == 1 & year == 2018 ~ 8369150,
+    com9 == 1 & year == 2019 ~ 8678205,
+    com9 == 1 & year == 2020 ~ 8091591,
+    com9 == 1 & year == 2021 ~ 8760986,
+    com9 == 1 & year == 2022 ~ 9797691,
+    com9 == 1 & year == 2023 ~ 11994355,
+
+    # Villa Alemana (com10)
+    com10 == 1 & year == 2018 ~ 4681875,
+    com10 == 1 & year == 2019 ~ 4919300,
+    com10 == 1 & year == 2020 ~ 4326818,
+    com10 == 1 & year == 2021 ~ 5097685,
+    com10 == 1 & year == 2022 ~ 6437164,
+    com10 == 1 & year == 2023 ~ 8535643,
+
+    # Default case: Assign NA if no condition is met
+    TRUE ~ NA_real_
+  ))
+
+
+EOP <- EOP %>%
+  mutate(log_ingresos_real = ifelse(ingresos_real > 0,
+                                          log(ingresos_real), 
+                                          NA))
+
+
 ```
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -314,7 +407,6 @@ table(EOP$useother_nona)
 
 ```
 
-
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 
 cronbach_ope <- alpha(na.omit(EOP[c("ope1", "ope2", "ope3", "ope4")]))
@@ -323,23 +415,28 @@ cronbach_ope
 cronbach_intpol <- alpha(na.omit(EOP[c("polint1", "polint2", "polint3", "polint4", "polint5")]))
 cronbach_intpol
 
-EOP_nona <- na.omit(EOP[c("ope1", "ope2", "ope3", "ope4", "dig_mun", "ingresos", "sex", "age", "SES", "education", "polint1", "polint2", "polint3", "polint4", "polint5", "year", "useweb_nona", "useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona")])
+cronbach_use <- alpha(na.omit(EOP[c("useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona")]))
+cronbach_use
+
+EOP_nona <- na.omit(EOP[c("ope1", "ope2", "ope3", "ope4", "dig_mun", "ingresos","log_ingresos_real", "sex", "age", "SES", "education", "polint1", "polint2", "polint3", "polint4", "polint5", "year", "useweb_nona", "useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona")])
 
 EOP_nona <- EOP_nona %>%
   mutate(across(where(is.labelled), as.numeric))
 
 cfa.model <- 'ope =~ ope1 + ope2 + ope3 + ope4'
 cfa.model2 <- 'intpol =~ polint1 + polint2 + polint3 + polint4 + polint5'
+cfa.model3 <- 'use =~ useadm_nona + useinfo_nona + usetransp_nona + useother_nona'
 
 fit_cfa <- cfa(cfa.model, data = EOP_nona)
 fit_cfa2 <- cfa(cfa.model2, data = EOP_nona)
+fit_cfa3 <- cfa(cfa.model3, data = EOP_nona)
 
 latent_scores <- predict(fit_cfa)
 latent_scores2 <- predict(fit_cfa2)
+latent_scores3 <- predict(fit_cfa3)
 
-EOP_nona <- cbind(EOP_nona, latent_scores, latent_scores2)
+EOP_nona <- cbind(EOP_nona, latent_scores, latent_scores2, latent_scores3)
 ```
-
 
 ## Results
 
@@ -517,12 +614,11 @@ ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, co
 
 ### Second Part: Analyses at the individual level, Chilean region of Valparaiso as case study
 
-Secondly, the specific case of the Valparaíso region in Chile was analysed using individual-level data. In this context, the aim was to test whether municipal digitalisation affects online political engagement by examining both attitudinal and behavioural components. The attitudinal component presents a complex picture (see Table 2). Living in a digitalised municipality does not appear to impact online political efficacy—defined as individuals' beliefs that the internet empowers citizens politically. However, the other contextual factor, living in a wealthy municipality, shows a negative and significant relationship with these attitudes. In other words, individuals in marginalised areas with poorer municipalities tend to view the Internet as a valuable tool for enhancing their political voice.
+Secondly, the specific case of the Valparaíso region in Chile was analysed using individual-level data. In this context, the aim was to test whether municipal digitalisation affects online political engagement by examining both attitudinal and behavioural components. The attitudinal component presents a complex picture (see Table 2). Living in a digitalised municipality does not appear to impact online political efficacy---defined as individuals' beliefs that the internet empowers citizens politically. However, the other contextual factor, living in a wealthy municipality, shows a negative and significant relationship with these attitudes. In other words, individuals in marginalised areas with poorer municipalities tend to view the Internet as a valuable tool for enhancing their political voice.
 
 Interestingly, the influence of a digitalised municipality changes when analysing specific measures of online political efficacy. Specifically, results indicate that the digitalisation of local government has a positive and significant relationship with OPE1, or the belief that "by using the internet, people like me have more political power."
 
 Regarding the behavioural dimension of online local participation, the results are consistent and robust (see Table 3). Living in a digitalised municipality has a positive and significant relationship with all measures of awareness and use of the official municipal website, a pattern not observed for residents of wealthy municipalities. In fact, while the relationship with living in a wealthy municipality is significant, it is in the opposite direction. In other words, the results suggest that it is not necessarily the budget but rather the efforts toward digitalisation that are crucial for enhancing local engagement.
-
 
 **Table 2** OLS for Online Political Efficacy at the Individual Level
 
@@ -545,24 +641,6 @@ summary(modele)
 
 **Table 3** OLS for Effective Municipality Webpage use at the Individual Level
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-modelf <- glm(useweb ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
-summary(modelf)
-
-modelg <- glm(useadm ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
-summary(modelg)
-
-modelh <- glm(useinfo ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
-summary(modelh)
-
-modeli <- glm(usetransp ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
-summary(modeli)
-
-modelj <- glm(useother ~ dig_mun + ingresos + sex + age + SES + education + ope1 + polint1 + factor(year), data = EOP, family = binomial)
-summary(modelj)
-
-```
-
 ```{r  echo=FALSE, message=FALSE, warning=FALSE}
 modelf_nona <- glm(useweb_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
 summary(modelf_nona)
@@ -578,9 +656,106 @@ summary(modeli_nona)
 
 modelj_nona <- glm(useother_nona ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona, family = binomial)
 summary(modelj_nona)
-```
 
+modelk_nona <- lm(use ~ dig_mun + ingresos + sex + age + SES + education + ope1 + intpol + factor(year), data = EOP_nona)
+summary(modelk_nona)
+```
 
 ## Conclusion
 
-[The results are consistent with previous literature. Marginalised areas—those with poorer municipalities—tend to view the Internet as a useful tool and are more likely to engage. At the same time, municipal digitalisation significantly impacts this engagement, which goes beyond simply requesting documents and completing administrative tasks to include accountability and accessing municipal information. It’s not about wealthy municipalities but rather about those that make an effort to digitalise.]
+\[The results are consistent with previous literature. Marginalised areas---those with poorer municipalities---tend to view the Internet as a useful tool and are more likely to engage. At the same time, municipal digitalisation significantly impacts this engagement, which goes beyond simply requesting documents and completing administrative tasks to include accountability and accessing municipal information. It's not about wealthy municipalities but rather about those that make an effort to digitalise.\] 
+
+
+##### INDIVIDUAL ANALYSIS - TO REPORT ##### 
+## Testing with real income 2018-2023
+
+```{r}
+modela_mean <- lm(ope ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modela_mean)
+
+modelb_mean <- lm(ope1 ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modelb_mean)
+
+modelc_mean <- lm(ope2 ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modelc_mean)
+
+modeld_mean <- lm(ope3 ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modeld_mean)
+
+modele_mean <- lm(ope4 ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + factor(year), data = EOP_nona)
+summary(modele_mean)
+```
+
+```{r}
+modelf_nona_real <- glm(useweb_nona ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelf_nona_real)
+
+modelg_nona_real <- glm(useadm_nona ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelg_nona_real)
+
+modelh_nona_real <- glm(useinfo_nona ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelh_nona_real)
+
+modeli_nona_real <- glm(usetransp_nona ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modeli_nona_real)
+
+modelj_nona_real <- glm(useother_nona ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona, family = binomial)
+summary(modelj_nona_real)
+
+modelk_nona_real <- lm(use ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + factor(year), data = EOP_nona)
+summary(modelk_nona_real)
+```
+
+```{r}
+# Create a binary variable for pre- and post-pandemic
+EOP_nona$post_pandemic <- ifelse(EOP_nona$year <= 2020, 0, 1)
+
+modela_pan <- lm(ope ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + post_pandemic, data = EOP_nona)
+summary(modela_pan)
+
+modela_pan_int1 <- lm(ope ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + post_pandemic + log_ingresos_real * post_pandemic , data = EOP_nona)
+summary(modela_pan_int1)
+
+modela_pan_int2 <- lm(ope ~ dig_mun + log_ingresos_real + sex + age + SES + education + intpol + post_pandemic + dig_mun * post_pandemic , data = EOP_nona)
+summary(modela_pan_int2)
+
+
+plot1 <- interact_plot(model = modela_pan_int1, pred = "log_ingresos_real", modx = "post_pandemic", 
+                       interval = TRUE, x.label = "Income", y.label = "OPE", 
+                       modx.labels = c("Pre-Pandemic", "Post-Pandemic"))
+plot1
+
+plot2 <- interact_plot(model = modela_pan_int2, pred = "dig_mun", modx = "post_pandemic", 
+                       interval = TRUE, x.label = "Digitalised Municipality", y.label = "OPE", 
+                       modx.labels = c("Pre-Pandemic", "Post-Pandemic"))
+plot2
+
+```
+
+```{r}
+modelk_pan <- lm(use ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + post_pandemic, data = EOP_nona)
+summary(modelk_pan)
+
+
+modela_pan_int3 <- lm(use ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + post_pandemic + log_ingresos_real * post_pandemic , data = EOP_nona)
+summary(modela_pan_int3)
+
+modela_pan_int4 <- lm(use ~ dig_mun + log_ingresos_real + sex + age + SES + education + ope + intpol + post_pandemic + dig_mun * post_pandemic , data = EOP_nona)
+summary(modela_pan_int4)
+
+
+plot3 <- interact_plot(model = modela_pan_int3, pred = "log_ingresos_real", modx = "post_pandemic", 
+                       interval = TRUE, x.label = "Income", y.label = "Use of Mun. Website", 
+                       modx.labels = c("Pre-Pandemic", "Post-Pandemic"))
+plot3
+
+plot4 <- interact_plot(model = modela_pan_int4, pred = "dig_mun", modx = "post_pandemic", 
+                       interval = TRUE, x.label = "Digitalised Municipality", y.label = "Use of Mun. Website", 
+                       modx.labels = c("Pre-Pandemic", "Post-Pandemic"))
+plot4
+
+```
+
+
+##### APPENDIX ##### 
+
