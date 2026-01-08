@@ -128,6 +128,11 @@ unmatched_cases <- anti_join(data_index, shape, by = "NOMBRE")
 head(unmatched_cases)
 ```
 
+```{r}
+describe(merged_data)
+```
+
+
 ## Loading fonts and theme for maps and graphs
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -644,7 +649,7 @@ print(global_moran)
 ggplot(merged_data, aes(x = Pob_Rural_Porc, y = Municipio_Digital, size = log_Poblacion.y)) +
   geom_point(alpha = 0.5, color = "darkblue") +
   geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
-  labs(title = "Rurality and digitalization",
+  labs(title = "Rurality and digitisation",
        x = "Rural Population (%)",
        y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
   theme_tufte2() +
@@ -658,7 +663,7 @@ dev.off()
 ggplot(merged_data, aes(x = log_Ingresos_Propios_Permanentes, y = Municipio_Digital, size = log_Poblacion.y)) +
   geom_point(alpha = 0.5, color = "darkblue") +
   geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
-  labs(title = "Municipal incomes and digitalization",
+  labs(title = "Municipal incomes and digitisation",
        x = "Municipal Income",
        y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
   theme_tufte2() +
@@ -672,7 +677,7 @@ dev.off()
 ggplot(merged_data, aes(x = share_Planta_Profes, y = Municipio_Digital, size = log_Poblacion.y)) +
   geom_point(alpha = 0.5, color = "darkblue") +
   geom_smooth(method = "lm", color = "#FDE725FF", se = TRUE) +  # Add linear regression line
-  labs(title = "Workforce and digitalization",
+  labs(title = "Workforce and digitisation",
        x = "Qualified Mun. Workforce (%)",
        y = "Digital Municipality Index") +  # Removed size label here as the legend is being removed
   theme_tufte2() +
