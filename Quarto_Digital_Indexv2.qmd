@@ -38,9 +38,9 @@ library(rdrobust)
 library(lmtest)
 library(sandwich)
 library(clubSandwich)
+library(fastDummies)
 
 ```
-
 
 ## Data at the municipal level
 
@@ -158,6 +158,7 @@ theme_tufte2 <- function(...) {
 ```
 
 ## Data at the Individual-Level
+
 ### Loading data and creating contextual variables
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -322,6 +323,8 @@ EOP <- EOP %>%
                                           NA))
 
 
+EOP <- fastDummies::dummy_cols(EOP, select_columns = "year", remove_first_dummy = FALSE)
+
 ```
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -354,7 +357,7 @@ cronbach_intpol
 cronbach_use <- alpha(na.omit(EOP[c("useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona")]))
 cronbach_use
 
-EOP_nona <- na.omit(EOP[c("ope1", "ope2", "ope3", "ope4", "dig_mun", "ingresos","log_ingresos_real", "sex", "age", "SES", "education", "polint1", "polint2", "polint3", "polint4", "polint5", "year", "useweb_nona", "useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona", "mun_id")])
+EOP_nona <- na.omit(EOP[c("ope1", "ope2", "ope3", "ope4", "dig_mun", "ingresos","log_ingresos_real", "sex", "age", "SES", "education", "polint1", "polint2", "polint3", "polint4", "polint5", "year", "useweb_nona", "useadm_nona", "useinfo_nona", "usetransp_nona", "useother_nona", "year_2018", "year_2019", "year_2020", "year_2021", "year_2022", "year_2023", "mun_id")])
 
 EOP_nona <- EOP_nona %>%
   mutate(across(where(is.labelled), as.numeric))
@@ -605,61 +608,61 @@ ggplot(coef_df, aes(x = Term, y = Estimate, ymin = Lower_CI, ymax = Upper_CI, co
 
 ## Second Part: Analyses at the individual level, Chilean region of Valparaiso as case study
 
-##### INDIVIDUAL ANALYSIS - TO REPORT ##### 
+##### INDIVIDUAL ANALYSIS - TO REPORT
+
 ## Testing with real income 2018-2023 and without education
 
 ```{r}
 modela_mean <- lm(ope ~ dig_mun + log_ingresos_real + sex + age + SES + intpol + factor(year), data = EOP_nona)
 #summary(modela_mean)
-coeftest(modela_mean, vcov = vcovCR(modela_mean, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modela_mean, vcov = vcovCR(modela_mean, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelb_mean <- lm(ope1 ~ dig_mun + log_ingresos_real + sex + age + SES + intpol + factor(year), data = EOP_nona)
 #summary(modelb_mean)
-coeftest(modelb_mean, vcov = vcovCR(modelb_mean, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelb_mean, vcov = vcovCR(modelb_mean, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelc_mean <- lm(ope2 ~ dig_mun + log_ingresos_real + sex + age + SES + intpol + factor(year), data = EOP_nona)
 #summary(modelc_mean)
-coeftest(modelc_mean, vcov = vcovCR(modelc_mean, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelc_mean, vcov = vcovCR(modelc_mean, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modeld_mean <- lm(ope3 ~ dig_mun + log_ingresos_real + sex + age + SES + intpol + factor(year), data = EOP_nona)
 #summary(modeld_mean)
-coeftest(modeld_mean, vcov = vcovCR(modeld_mean, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modeld_mean, vcov = vcovCR(modeld_mean, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modele_mean <- lm(ope4 ~ dig_mun + log_ingresos_real + sex + age + SES + intpol + factor(year), data = EOP_nona)
 #summary(modele_mean)
-coeftest(modele_mean, vcov = vcovCR(modele_mean, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modele_mean, vcov = vcovCR(modele_mean, cluster = EOP_nona$mun_id, type = "CR2"))
 
 ```
 
 ```{r}
 modelf_nona_real <- glm(useweb_nona ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona, family = binomial)
 #summary(modelf_nona_real)
-coeftest(modelf_nona_real, vcov = vcovCR(modelf_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelf_nona_real, vcov = vcovCR(modelf_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelg_nona_real <- glm(useadm_nona ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona, family = binomial)
 #summary(modelg_nona_real)
-coeftest(modelg_nona_real, vcov = vcovCR(modelg_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelg_nona_real, vcov = vcovCR(modelg_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelh_nona_real <- glm(useinfo_nona ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona, family = binomial)
 #summary(modelh_nona_real)
-coeftest(modelh_nona_real, vcov = vcovCR(modelh_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelh_nona_real, vcov = vcovCR(modelh_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modeli_nona_real <- glm(usetransp_nona ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona, family = binomial)
 #summary(modeli_nona_real)
-coeftest(modeli_nona_real, vcov = vcovCR(modeli_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modeli_nona_real, vcov = vcovCR(modeli_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelj_nona_real <- glm(useother_nona ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona, family = binomial)
 #summary(modelj_nona_real)
-coeftest(modelj_nona_real, vcov = vcovCR(modelj_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelj_nona_real, vcov = vcovCR(modelj_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
 modelk_nona_real <- lm(use ~ dig_mun + log_ingresos_real + sex + age + SES + ope + intpol + factor(year), data = EOP_nona)
 #summary(modelk_nona_real)
-coeftest(modelk_nona_real, vcov = vcovCR(modelk_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
+#coeftest(modelk_nona_real, vcov = vcovCR(modelk_nona_real, cluster = EOP_nona$mun_id, type = "CR2"))
 
-```
+`
 
-
-## Testing Pandemic Effect ##
+## Testing Pandemic Effect
 
 ```{r}
 # Create a binary variable for pre- and post-pandemic
@@ -717,6 +720,130 @@ plot4
 
 ```
 
+```{r}
+vif(modela_mean)
+vif(modelb_mean)
+vif(modelc_mean)
+vif(modeld_mean)
+vif(modele_mean)
+vif(modelf_nona_real)
+vif(modelg_nona_real)
+vif(modelh_nona_real)
+vif(modeli_nona_real)
+vif(modelj_nona_real)
+vif(modelk_nona_real)
+```
 
-##### APPENDIX ##### 
 
+##### NEW INTERACTIONS
+
+```{r}
+modela_mean_int <- lm(ope ~ dig_mun + log_ingresos_real * SES + sex + age + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modela_mean_int)
+coeftest(modela_mean_int, vcov = vcovCR(modela_mean_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelb_mean_int <- lm(ope1 ~ dig_mun + log_ingresos_real * SES + sex + age + intpol + + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modelb_mean_int)
+coeftest(modelb_mean_int, vcov = vcovCR(modelb_mean_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelc_mean_int <- lm(ope2 ~ dig_mun + log_ingresos_real * SES + sex + age + intpol + + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modelc_mean_int)
+coeftest(modelc_mean_int, vcov = vcovCR(modelc_mean_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modeld_mean_int <- lm(ope3 ~ dig_mun + log_ingresos_real * SES + sex + age + intpol + + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modeld_mean_int)
+coeftest(modeld_mean_int, vcov = vcovCR(modeld_mean_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modele_mean_int <- lm(ope4 ~ dig_mun + log_ingresos_real * SES + sex + age + intpol + + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modele_mean_int)
+coeftest(modele_mean_int, vcov = vcovCR(modele_mean_int, cluster = EOP_nona$mun_id, type = "CR2"))
+```
+
+
+```{r}
+
+interact_plot(modela_mean_int,
+              pred = log_ingresos_real,
+              modx = SES,
+              data = EOP_nona,
+              interval = TRUE,
+              main.title = "Municipality Wealthy x Individual SES",
+              x.label = "Municipality Wealthy",
+              y.label = "Predicted OPE - Factor",
+              legend.main = "Individual SES")
+
+tiff(filename = "./output/Figure 4_1.tif", units="in", width=8, height=5, res=300, bg = "white")
+  last_plot()
+dev.off()
+
+interact_plot(modelc_mean_int,
+              pred = log_ingresos_real,
+              modx = SES,
+              data = EOP_nona,
+              interval = TRUE,
+              main.title = "Municipality Wealthy x Individual SES",
+              x.label = "Municipality Wealthy",
+              y.label = "Predicted ope2 - Greater Voice",
+              legend.main = "Individual SES")
+
+tiff(filename = "./output/Figure 4_2.tif", units="in", width=8, height=5, res=300, bg = "white")
+  last_plot()
+dev.off()
+
+interact_plot(modele_mean_int,
+              pred = log_ingresos_real,
+              modx = SES,
+              data = EOP_nona,
+              interval = TRUE,
+              main.title = "Municipality Wealthy x Individual SES",
+              x.label = "Municipality Wealthy",
+              y.label = "Predicted ope4 - Officials Concern",
+              legend.main = "Individual SES")
+
+tiff(filename = "./output/Figure 4_3.tif", units="in", width=8, height=5, res=300, bg = "white")
+  last_plot()
+dev.off()
+
+```
+
+```{r}
+modelf_int <- glm(useweb_nona ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona, family = binomial)
+#summary(modelf_int)
+coeftest(modelf_int, vcov = vcovCR(modelf_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelg_int <- glm(useadm_nona ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona, family = binomial)
+#summary(modelg_int)
+coeftest(modelg_int, vcov = vcovCR(modelg_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelh_int <- glm(useinfo_nona ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona, family = binomial)
+#summary(modelh_int)
+coeftest(modelh_int, vcov = vcovCR(modelh_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modeli_int <- glm(usetransp_nona ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona, family = binomial)
+#summary(modeli_int)
+coeftest(modeli_int, vcov = vcovCR(modeli_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelj_int <- glm(useother_nona ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona, family = binomial)
+#summary(modelj_int)
+coeftest(modelj_int, vcov = vcovCR(modelj_int, cluster = EOP_nona$mun_id, type = "CR2"))
+
+modelk_int <- lm(use ~ dig_mun + log_ingresos_real * SES + sex + age + ope + intpol + year_2019 + year_2020 + year_2021 + year_2022 + year_2023, data = EOP_nona)
+#summary(modelk_int)
+coeftest(modelk_int, vcov = vcovCR(modelk_int, cluster = EOP_nona$mun_id, type = "CR2"))
+```
+
+```{r}
+interact_plot(modelj_int,
+              pred = log_ingresos_real,
+              modx = SES,
+              data = EOP_nona,
+              interval = TRUE,
+              main.title = "Municipality Wealthy x Individual SES",
+              x.label = "Municipality Wealthy",
+              y.label = "Predicted 'Other Uses' of M. Website",
+              legend.main = "Individual SES")
+
+tiff(filename = "./output/Figure 5_1.tif", units="in", width=8, height=5, res=300, bg = "white")
+  last_plot()
+dev.off()
+```
